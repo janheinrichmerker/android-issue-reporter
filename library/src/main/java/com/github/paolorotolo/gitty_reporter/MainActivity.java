@@ -7,8 +7,7 @@ import android.view.MenuItem;
 public class MainActivity extends GittyReporter {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void init() {
         setTargetRepository("paolorotolo", "TestRepo");
         setGitHubCredentials("numix-ood", "n1u2m3i4x5");
     }

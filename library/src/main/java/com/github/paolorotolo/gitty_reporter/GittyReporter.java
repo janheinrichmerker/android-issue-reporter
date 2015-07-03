@@ -3,6 +3,7 @@ package com.github.paolorotolo.gitty_reporter;
 import android.animation.Animator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.eclipse.egit.github.core.Issue;
@@ -18,7 +20,7 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.IssueService;
 import java.io.IOException;
 
-public class GittyReporter extends AppCompatActivity {
+public abstract class GittyReporter extends AppCompatActivity {
 
     private EditText bugTitleEditText;
     private EditText bugDescriptionEditText;
@@ -31,7 +33,7 @@ public class GittyReporter extends AppCompatActivity {
     private Boolean enableGitHubLogin = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    final protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,45 +41,45 @@ public class GittyReporter extends AppCompatActivity {
         deviceInfoEditText = (EditText) findViewById(R.id.device_info);
         getDeviceInfo();
         deviceInfoEditText.setText(deviceInfo);
-    }
 
-    public void onFABclick(View v){
-        if (enableGitHubLogin) {
-            showLoginPage();
-        } else {
-            sendIssue();
+        init();
+
+        final View nextFab = findViewById(R.id.fab_next);
+        final View sendFab = findViewById(R.id.fab_send);
+
+        if (!enableGitHubLogin){
+            nextFab.setVisibility(View.INVISIBLE);
+            sendFab.setVisibility(View.VISIBLE);
         }
     }
 
-    public void showLoginPage(){
-        showLoginAnimation();
+    public void reportIssue (View v) {
+        if (enableGitHubLogin) {
+            final AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
+            if (!githubCheckbox.isChecked()){
+                EditText userName = (EditText) findViewById(R.id.login_username);
+                EditText userPassword = (EditText) findViewById(R.id.login_password);
+                this.gitUser = userName.getText().toString();
+                this.gitPassword = userPassword.getText().toString();
+                sendBugReport();
+            } else {
+                sendBugReport();
+            }
+        } else {
+            sendBugReport();
+        }
     }
 
-    public void reportIssue(View v){
-        sendIssue();
-    }
-
-    public void sendIssue () {
+    private void sendBugReport(){
         bugTitleEditText = (EditText) findViewById(R.id.bug_title);
         bugDescriptionEditText = (EditText) findViewById(R.id.bug_description);
         final String bugTitle = bugTitleEditText.getText().toString();
         final String bugDescription = bugDescriptionEditText.getText().toString();
 
-        final IssueService service = new IssueService(new GitHubClient().setCredentials(gitUser, gitPassword));
-
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo);
-                    issue = service.createIssue(targetUser, targetRepository, issue);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        new reportIssue().execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository);
     }
 
-    public void showLoginAnimation () {
+    public void showLoginPage (View v) {
         // previously invisible view
         final View colorView = findViewById(R.id.material_ripple);
         final View loginView = findViewById(R.id.loginFrame);
@@ -221,4 +223,6 @@ public class GittyReporter extends AppCompatActivity {
             Log.e("android-issue-github", "Error getting Device INFO");
         }
     }
+
+    abstract void init();
 }
