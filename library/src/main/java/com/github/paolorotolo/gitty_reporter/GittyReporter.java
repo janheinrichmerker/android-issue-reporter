@@ -1,6 +1,9 @@
 package com.github.paolorotolo.gitty_reporter;
 
 import android.animation.Animator;
+import android.content.DialogInterface;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -13,7 +16,9 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.client.GitHubClient;
@@ -30,6 +35,7 @@ public abstract class GittyReporter extends AppCompatActivity {
     private String targetRepository;
     private String gitUser;
     private String gitPassword;
+    private String extraInfo;
     private Boolean enableGitHubLogin = true;
 
     @Override
@@ -51,6 +57,25 @@ public abstract class GittyReporter extends AppCompatActivity {
             nextFab.setVisibility(View.INVISIBLE);
             sendFab.setVisibility(View.VISIBLE);
         }
+
+        AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
+        final EditText userName = (EditText) findViewById(R.id.login_username);
+        final EditText userPassword = (EditText) findViewById(R.id.login_password);
+
+        githubCheckbox.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            userName.setEnabled(false);
+                            userPassword.setEnabled(false);
+                        } else {
+                            userName.setEnabled(true);
+                            userPassword.setEnabled(true);
+                        }
+                    }
+                }
+        );
     }
 
     public void reportIssue (View v) {
@@ -59,15 +84,55 @@ public abstract class GittyReporter extends AppCompatActivity {
             if (!githubCheckbox.isChecked()){
                 EditText userName = (EditText) findViewById(R.id.login_username);
                 EditText userPassword = (EditText) findViewById(R.id.login_password);
-                this.gitUser = userName.getText().toString();
-                this.gitPassword = userPassword.getText().toString();
-                sendBugReport();
+
+                if (validateGitHubLogin()){
+                    this.gitUser = userName.getText().toString();
+                    this.gitPassword = userPassword.getText().toString();
+                    sendBugReport();
+                }
             } else {
                 sendBugReport();
             }
         } else {
-            sendBugReport();
+            if (validateBugReport()) {
+                sendBugReport();
+            }
         }
+    }
+
+    private boolean validateGitHubLogin(){
+        EditText userName = (EditText) findViewById(R.id.login_username);
+        EditText userPassword = (EditText) findViewById(R.id.login_password);
+
+        if (userName.getText().toString().equals("")){
+            showToast("Please enter a vaild username");
+
+            return false;
+        } else if (userPassword.getText().toString().equals("")) {
+            showToast("Please enter a vaild password");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean validateBugReport(){
+        bugTitleEditText = (EditText) findViewById(R.id.bug_title);
+        bugDescriptionEditText = (EditText) findViewById(R.id.bug_description);
+
+        if (bugTitleEditText.getText().toString().equals("")){
+            showToast("Please enter a valid title");
+            return false;
+        } else if (bugDescriptionEditText.getText().toString().equals("")){
+            showToast("Please describe your issue");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void showToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     private void sendBugReport(){
@@ -76,11 +141,31 @@ public abstract class GittyReporter extends AppCompatActivity {
         final String bugTitle = bugTitleEditText.getText().toString();
         final String bugDescription = bugDescriptionEditText.getText().toString();
 
-        new reportIssue().execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository);
+        if (extraInfo != null) {
+            new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo);
+        } else {
+            extraInfo = "";
+            new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo);
+        }
     }
 
     public void showLoginPage (View v) {
-        // previously invisible view
+        if (validateBugReport()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                animateLoginPage();
+            } else {
+                View loginView = findViewById(R.id.loginFrame);
+                View nextFab = findViewById(R.id.fab_next);
+                View sendFab = findViewById(R.id.fab_send);
+
+                loginView.setVisibility(View.VISIBLE);
+                nextFab.setVisibility(View.INVISIBLE);
+                sendFab.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private void animateLoginPage(){
         final View colorView = findViewById(R.id.material_ripple);
         final View loginView = findViewById(R.id.loginFrame);
         final View nextFab = findViewById(R.id.fab_next);
@@ -156,7 +241,8 @@ public abstract class GittyReporter extends AppCompatActivity {
 
             @Override
             public void onAnimationCancel(android.animation.Animator animation) {
-            }});
+            }
+        });
 
         colorView.setVisibility(View.VISIBLE);
         rippleAnim.start();
@@ -167,9 +253,13 @@ public abstract class GittyReporter extends AppCompatActivity {
         this.targetRepository = repository;
     }
 
-    public void setGitHubCredentials(String user, String password){
+    public void setGuestGitHubCredentials(String user, String password){
         this.gitUser = user;
         this.gitPassword = password;
+    }
+
+    public void setExtraInfo(String info){
+        this.extraInfo = info;
     }
 
     public void enableGitHubLogin(boolean enableLogin){

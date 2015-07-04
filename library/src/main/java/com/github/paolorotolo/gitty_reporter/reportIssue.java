@@ -1,6 +1,11 @@
 package com.github.paolorotolo.gitty_reporter;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 
 import org.eclipse.egit.github.core.Issue;
 import org.eclipse.egit.github.core.client.GitHubClient;
@@ -10,11 +15,19 @@ import java.io.IOException;
 
 public class reportIssue extends AsyncTask<String, Integer, String> {
 
+    Context mContext;
+    ProgressDialog progress;
+
+    public reportIssue (Context context){
+        mContext = context;
+    }
+
     // Runs in UI before background thread is called
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        // Do something like display a progress bar
+        progress = ProgressDialog.show(mContext, "Please wait",
+                "Uploading report on GitHub", true);
     }
 
     // This is run in a background thread
@@ -28,33 +41,69 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
         String deviceInfo = params[4];
         String targetUser = params[5];
         String targetRepository = params[6];
+        String extraInfo = params[7];
 
 
         final IssueService service = new IssueService(new GitHubClient().setCredentials(user, password));
 
-        Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo);
-        try {
-            issue = service.createIssue(targetUser, targetRepository, issue);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (extraInfo.equals("")) {
+            Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo);
+            try {
+                issue = service.createIssue(targetUser, targetRepository, issue);
+                return "ok";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        } else {
+            Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo + "\n\nExtra Info: " + extraInfo);
+            try {
+                issue = service.createIssue(targetUser, targetRepository, issue);
+                return "ok";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return e.toString();
+            }
         }
-
-        return "this string is passed to onPostExecute";
     }
 
     // This is called from background thread but runs in UI
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-
-        // Do things like update the progress bar
     }
 
     // This runs in UI when background thread finishes
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-
-        // Do things like hide the progress bar or change a TextView
+        if (result.equals("ok")) {
+            progress.dismiss();
+            ((Activity)mContext).finish();
+        } else if (result.equals("org.eclipse.egit.github.core.client.RequestException: Bad credentials (401)")){
+            progress.dismiss();
+            new AlertDialog.Builder(mContext)
+                    .setTitle("Unable to send report")
+                    .setMessage("Wrong username or password.")
+                    .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(R.drawable.ic_mood_bad_black_24dp)
+                    .show();
+        } else {
+            progress.dismiss();
+            new AlertDialog.Builder(mContext)
+                    .setTitle("Unable to send report")
+                    .setMessage("An unexpected error occurred. If the problem persists, contact the app developer.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((Activity)mContext).finish();
+                        }
+                    })
+                    .setIcon(R.drawable.ic_mood_bad_black_24dp)
+                    .show();
+        }
     }
 }
