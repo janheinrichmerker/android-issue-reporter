@@ -6,7 +6,8 @@
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>
 
-A powerful and simple library to open issues on GitHub directly from your app. <br>
+*Is your Inbox full of bug reports and requests from your users?* <br>
+Try Gitty Reporter, a new material designed utility to report issues from your app directly on GitHub, even without an account.
 
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait.png" width="300">
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait2.png" width="300">
