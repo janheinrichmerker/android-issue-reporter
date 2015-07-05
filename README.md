@@ -1,5 +1,13 @@
 # Gitty
-A powerful and simple library to open issues on GitHub directly from your app.
+[![Maven Central](https://img.shields.io/badge/maven--central-gitty--reporter-green.svg
+)](http://search.maven.org/#browse%7C-77465355)
+<br><a href="https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>
+
+A powerful and simple library to open issues on GitHub directly from your app. <br>
+
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait.png" width="300">
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait2.png" width="300">
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/landscape.png" width="600">
