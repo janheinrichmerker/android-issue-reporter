@@ -48,7 +48,7 @@ public class Gitty extends GittyReporter {
         // If false, Gitty will always use your Auth token
         enableUserGitHubLogin(true);
         
-        // Set if Gitty can use your Auth token if user doesn't have a GitHub account (default: true)
+        // Set if Gitty can use your Auth token for users without a GitHub account (default: true)
         // If false, Gitty will redirect non registred users to github.com/join
         enableGuestGitHubLogin(true);
         
@@ -60,7 +60,7 @@ public class Gitty extends GittyReporter {
 
 ## Featuring Material Design
 Gitty Reporter follows Google's material design guidelines.
-On >= Lollipop, it includs also material animations.
+On >= Lollipop, it also includes material animations.
 
 ![](https://raw.githubusercontent.com/PaoloRotolo/GittyReporter/master/art/gitty.gif)
 
