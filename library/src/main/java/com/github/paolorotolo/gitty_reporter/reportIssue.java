@@ -42,28 +42,23 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
         String targetUser = params[5];
         String targetRepository = params[6];
         String extraInfo = params[7];
+        String gitToken = params[8];
 
+        IssueService service;
 
-        final IssueService service = new IssueService(new GitHubClient().setCredentials(user, password));
-
-        if (extraInfo.equals("")) {
-            Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo);
-            try {
-                issue = service.createIssue(targetUser, targetRepository, issue);
-                return "ok";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return e.toString();
-            }
+        if (user.equals("")) {
+            service = new IssueService(new GitHubClient().setOAuth2Token(gitToken));
         } else {
-            Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo + "\n\nExtra Info: " + extraInfo);
-            try {
-                issue = service.createIssue(targetUser, targetRepository, issue);
-                return "ok";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return e.toString();
-            }
+            service = new IssueService(new GitHubClient().setCredentials(user, password));
+        }
+
+        Issue issue = new Issue().setTitle(bugTitle).setBody(bugDescription + "\n\n" + deviceInfo + "\n\nExtra Info: " + extraInfo);
+        try {
+            issue = service.createIssue(targetUser, targetRepository, issue);
+            return "ok";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.toString();
         }
     }
 
@@ -84,7 +79,7 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
             progress.dismiss();
             new AlertDialog.Builder(mContext)
                     .setTitle("Unable to send report")
-                    .setMessage("Wrong username or password.")
+                    .setMessage("Wrong username or password or invalid access token.")
                     .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // do nothing

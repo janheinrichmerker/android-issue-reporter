@@ -2,10 +2,14 @@ package com.github.paolorotolo.gitty_reporter;
 
 import android.animation.Animator;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.view.Menu;
@@ -36,7 +40,9 @@ public abstract class GittyReporter extends AppCompatActivity {
     private String gitUser;
     private String gitPassword;
     private String extraInfo;
+    private String gitToken;
     private Boolean enableGitHubLogin = true;
+    private Boolean enableGuestGitHubLogin = true;
 
     @Override
     final protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,7 @@ public abstract class GittyReporter extends AppCompatActivity {
         getDeviceInfo();
         deviceInfoEditText.setText(deviceInfo);
 
-        init();
+        init(savedInstanceState);
 
         final View nextFab = findViewById(R.id.fab_next);
         final View sendFab = findViewById(R.id.fab_send);
@@ -59,8 +65,16 @@ public abstract class GittyReporter extends AppCompatActivity {
         }
 
         AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
+        AppCompatButton registerButton = (AppCompatButton) findViewById(R.id.github_register);
+
         final EditText userName = (EditText) findViewById(R.id.login_username);
         final EditText userPassword = (EditText) findViewById(R.id.login_password);
+
+        if (!enableGuestGitHubLogin){
+            githubCheckbox.setChecked(false);
+            githubCheckbox.setVisibility(View.GONE);
+            registerButton.setVisibility(View.VISIBLE);
+        }
 
         githubCheckbox.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -68,7 +82,9 @@ public abstract class GittyReporter extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked){
                             userName.setEnabled(false);
+                            userName.setText("");
                             userPassword.setEnabled(false);
+                            userPassword.setText("");
                         } else {
                             userName.setEnabled(true);
                             userPassword.setEnabled(true);
@@ -81,20 +97,24 @@ public abstract class GittyReporter extends AppCompatActivity {
     public void reportIssue (View v) {
         if (enableGitHubLogin) {
             final AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
-            if (!githubCheckbox.isChecked()){
-                EditText userName = (EditText) findViewById(R.id.login_username);
-                EditText userPassword = (EditText) findViewById(R.id.login_password);
+            EditText userName = (EditText) findViewById(R.id.login_username);
+            EditText userPassword = (EditText) findViewById(R.id.login_password);
 
+            if (!githubCheckbox.isChecked()){
                 if (validateGitHubLogin()){
                     this.gitUser = userName.getText().toString();
                     this.gitPassword = userPassword.getText().toString();
                     sendBugReport();
                 }
             } else {
+                this.gitUser = "";
+                this.gitPassword = "";
                 sendBugReport();
             }
         } else {
             if (validateBugReport()) {
+                this.gitUser = "";
+                this.gitPassword = "";
                 sendBugReport();
             }
         }
@@ -141,12 +161,14 @@ public abstract class GittyReporter extends AppCompatActivity {
         final String bugTitle = bugTitleEditText.getText().toString();
         final String bugDescription = bugDescriptionEditText.getText().toString();
 
-        if (extraInfo != null) {
-            new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo);
-        } else {
-            extraInfo = "";
-            new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo);
+        if (extraInfo == null) {
+            this.extraInfo = "Nothing to show.";
+        } else if (!enableGitHubLogin){
+            this.gitUser = "";
+            this.gitPassword = "";
         }
+
+        new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo, gitToken, enableGitHubLogin.toString());
     }
 
     public void showLoginPage (View v) {
@@ -253,17 +275,20 @@ public abstract class GittyReporter extends AppCompatActivity {
         this.targetRepository = repository;
     }
 
-    public void setGuestGitHubCredentials(String user, String password){
-        this.gitUser = user;
-        this.gitPassword = password;
+    public void setGuestOAuth2Token(String token){
+        this.gitToken = token;
     }
 
     public void setExtraInfo(String info){
         this.extraInfo = info;
     }
 
-    public void enableGitHubLogin(boolean enableLogin){
+    public void enableUserGitHubLogin(boolean enableLogin){
         this.enableGitHubLogin = enableLogin;
+    }
+
+    public void enableGuestGitHubLogin(boolean enableGuest){
+        this.enableGuestGitHubLogin = enableGuest;
     }
 
     @Override
@@ -286,6 +311,11 @@ public abstract class GittyReporter extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openGitHubRegisterPage(View v){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/join"));
+        startActivity(browserIntent);
     }
 
     private void getDeviceInfo() {
@@ -314,5 +344,5 @@ public abstract class GittyReporter extends AppCompatActivity {
         }
     }
 
-    abstract void init();
+    public abstract void init(@Nullable Bundle savedInstanceState);
 }
