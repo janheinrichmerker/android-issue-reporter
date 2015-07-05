@@ -64,5 +64,8 @@ On >= Lollipop, it includs also material animations.
 
 ![](https://raw.githubusercontent.com/PaoloRotolo/GittyReporter/master/art/gitty.gif)
 
+## Example
+I've uploaded an example app here on GitHub. Check it out! It's also available on [Google Play](https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example).
+
 ## Apps using it
  * Some apps at **Numix Project** Ltd. We created a GitHub bot named [numix-ood](https://github.com/numix-ood) (*Doctor Who anyone?*).
