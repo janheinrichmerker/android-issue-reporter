@@ -1,4 +1,4 @@
-# Gitty
+# Gitty Reporter
 [![Maven Central](https://img.shields.io/badge/maven--central-gitty--reporter-green.svg
 )](http://search.maven.org/#browse%7C-77465355)
 <br><a href="https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example">
@@ -7,7 +7,7 @@
 </a>
 
 *Is your Inbox full of bug reports and requests from your users?* <br>
-Try Gitty Reporter, a new material designed utility to report issues from your app directly on GitHub, even without an account.
+**Gitty Reporter is a new material designed library to report issues from your app directly on GitHub, even without an account.**
 
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait.png" width="300">
 <img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait2.png" width="300">
