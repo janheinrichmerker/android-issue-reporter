@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Gitty Reporter Example</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome">Welcome! Test Gitty Reporter here.</string>
+    <string name="gitty">Start default Gitty</string>
+    <string name="gitty_no_guest">Disable Guest login</string>
+    <string name="gitty_no_login">Disable User login</string>
+    <string name="note">All reports will return an error because the token shipped with this example app is not valid. \n\n  Please read on GitHub how to integrate Gitty Reporter with your app.</string>
 </resources>

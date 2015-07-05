@@ -22,6 +22,7 @@ import android.view.animation.Animation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.eclipse.egit.github.core.Issue;
@@ -47,7 +48,7 @@ public abstract class GittyReporter extends AppCompatActivity {
     @Override
     final protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.gitty_reporter_layout);
 
         // Get Device info and print them in EditText
         deviceInfoEditText = (EditText) findViewById(R.id.device_info);
@@ -292,25 +293,18 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    public void onBackPressed() {
+        View loginView = findViewById(R.id.loginFrame);
+        if (loginView.getVisibility() == View.VISIBLE){
+            View nextFab = findViewById(R.id.fab_next);
+            View sendFab = findViewById(R.id.fab_send);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            loginView.setVisibility(View.INVISIBLE);
+            nextFab.setVisibility(View.VISIBLE);
+            sendFab.setVisibility(View.INVISIBLE);
+        } else {
+            finish();
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void openGitHubRegisterPage(View v){
