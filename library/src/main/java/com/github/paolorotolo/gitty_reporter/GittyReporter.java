@@ -348,7 +348,7 @@ public abstract class GittyReporter extends AppCompatActivity {
 
     private void getDeviceInfo() {
         try {
-            String s = "Debug-infos:";
+            String s = "Debug info:";
             s += "\n OS Version: "      + System.getProperty("os.version")      + "(" + android.os.Build.VERSION.INCREMENTAL + ")";
             s += "\n OS API Level: "    + android.os.Build.VERSION.SDK_INT;
             s += "\n Device: "          + android.os.Build.DEVICE;
@@ -368,7 +368,7 @@ public abstract class GittyReporter extends AppCompatActivity {
 
             deviceInfo = s;
         } catch (Exception e) {
-            Log.e("android-issue-github", "Error getting Device INFO");
+            Log.e("gitty-reporter", "Error getting Device INFO");
         }
     }
 
