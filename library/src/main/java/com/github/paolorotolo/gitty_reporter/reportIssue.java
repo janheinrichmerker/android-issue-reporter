@@ -8,10 +8,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Label;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.IssueService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class reportIssue extends AsyncTask<String, Integer, String> {
 
