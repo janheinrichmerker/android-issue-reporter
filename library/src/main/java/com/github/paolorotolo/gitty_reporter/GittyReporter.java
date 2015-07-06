@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.eclipse.egit.github.core.Issue;
@@ -125,35 +128,66 @@ public abstract class GittyReporter extends AppCompatActivity {
         EditText userName = (EditText) findViewById(R.id.login_username);
         EditText userPassword = (EditText) findViewById(R.id.login_password);
 
-        if (userName.getText().toString().equals("")){
-            showToast("Please enter a vaild username");
+        boolean hasErrors = false;
 
-            return false;
-        } else if (userPassword.getText().toString().equals("")) {
-            showToast("Please enter a vaild password");
-            return false;
+        if (TextUtils.isEmpty(userName.getText())){
+            setError(userName, "Please enter a vaild username");
+
+            hasErrors = true;
         } else {
-            return true;
+            removeError(userName);
         }
+
+        if (TextUtils.isEmpty(userPassword.getText())) {
+            setError(userPassword, "Please enter a vaild password");
+
+            hasErrors = true;
+        } else {
+            removeError(userPassword);
+        }
+
+        return !hasErrors;
     }
 
     private boolean validateBugReport(){
         bugTitleEditText = (EditText) findViewById(R.id.bug_title);
         bugDescriptionEditText = (EditText) findViewById(R.id.bug_description);
 
-        if (bugTitleEditText.getText().toString().equals("")){
-            showToast("Please enter a valid title");
-            return false;
-        } else if (bugDescriptionEditText.getText().toString().equals("")){
-            showToast("Please describe your issue");
-            return false;
+        boolean hasErrors = false;
+
+        if (TextUtils.isEmpty(bugTitleEditText.getText())) {
+            setError(bugTitleEditText, "Please enter a valid title");
+
+            hasErrors = true;
         } else {
-            return true;
+            removeError(bugTitleEditText);
         }
+
+        if (TextUtils.isEmpty(bugDescriptionEditText.getText())) {
+            setError(bugDescriptionEditText, "Please describe your issue");
+
+            hasErrors = true;
+        } else {
+            removeError(bugDescriptionEditText);
+        }
+
+        return !hasErrors;
     }
 
-    private void showToast(String text){
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    private void setError(TextView view, String text) {
+        TextInputLayout parent = (TextInputLayout) view.getParent();
+
+        // there is a small flashing when the error is set again
+        // the only way to fix that is to track if the error is
+        // currently shown, because for some reason TextInputLayout
+        // doesn't provide any getError methods.
+        parent.setError(text);
+    }
+
+    private void removeError(TextView view) {
+        TextInputLayout parent = (TextInputLayout) view.getParent();
+
+        parent.setError(null);
     }
 
     private void sendBugReport(){
