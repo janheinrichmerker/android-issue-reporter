@@ -6,6 +6,8 @@
        src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>
 
+Watch complete video on [YouTube](https://www.youtube.com/watch?v=woYUOilPrpY).
+
 *Is your Inbox full of bug reports and requests from your users?* <br>
 **Gitty Reporter is a new material designed library to report issues from your app directly on GitHub, even without an account.**
 
@@ -61,7 +63,7 @@ public class Gitty extends GittyReporter {
 
 ## Featuring Material Design
 Gitty Reporter follows Google's material design guidelines.
-On >= Lollipop, it also includes material animations.
+On >= Lollipop, it also includes material animations [watch them in HD](https://www.youtube.com/watch?v=woYUOilPrpY).
 
 ![](https://raw.githubusercontent.com/PaoloRotolo/GittyReporter/master/art/gitty.gif)
 
