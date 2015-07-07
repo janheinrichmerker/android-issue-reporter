@@ -5,19 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
     <FrameLayout
-        android:id="@+id/reportFrame"
+        android:id="@+id/gittyreporter_reportFrame"
         android:focusable="true" android:focusableInTouchMode="true"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/primary">
+        android:background="@color/gittyreporter_primary">
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollReport"
+        android:id="@+id/gittyreporter_scrollReport"
         android:fillViewport="true"
         android:scrollbars="none"
-        android:paddingLeft="@dimen/card_padding"
-        android:paddingRight="@dimen/card_padding">
+        android:paddingLeft="@dimen/gittyreporter_card_padding"
+        android:paddingRight="@dimen/gittyreporter_card_padding">
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -25,14 +25,14 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="192dp"
-                android:text="@string/headline1"
+                android:text="@string/gittyreporter_headline1"
                 android:gravity="bottom"
                 android:paddingLeft="16dp"
                 android:paddingBottom="16dp"
-                android:textColor="@color/text"
+                android:textColor="@color/gittyreporter_text"
                 android:textSize="@dimen/abc_text_size_display_1_material"/>
             <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
+                android:id="@+id/gittyreporter_card_view"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
                 <LinearLayout
@@ -47,36 +47,36 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="32dp">
                         <EditText
-                            android:id="@+id/bug_title"
+                            android:id="@+id/gittyreporter_bug_title"
                             android:singleLine="true"
                             android:inputType="textCapSentences"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/abc_text_size_body_2_material"
-                            android:hint="@string/title"/>
+                            android:hint="@string/gittyreporter_title"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="32dp">
                         <EditText
-                            android:id="@+id/bug_description"
+                            android:id="@+id/gittyreporter_bug_description"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/abc_text_size_body_2_material"
-                            android:hint="@string/description"/>
+                            android:hint="@string/gittyreporter_description"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="32dp">
                         <EditText
-                            android:id="@+id/device_info"
+                            android:id="@+id/gittyreporter_device_info"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
                             android:textSize="@dimen/abc_text_size_body_2_material"
-                            android:hint="@string/device_info"/>
+                            android:hint="@string/gittyreporter_device_info"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -84,19 +84,19 @@
     </ScrollView>
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/loginFrame"
+        android:id="@+id/gittyreporter_loginFrame"
         android:visibility="invisible"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/primary2">
+        android:background="@color/gittyreporter_primary2">
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:fillViewport="true"
-            android:id="@+id/scrollLogin"
+            android:id="@+id/gittyreporter_scrollLogin"
             android:scrollbars="none"
-            android:paddingLeft="@dimen/card_padding"
-            android:paddingRight="@dimen/card_padding">
+            android:paddingLeft="@dimen/gittyreporter_card_padding"
+            android:paddingRight="@dimen/gittyreporter_card_padding">
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -104,11 +104,11 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="192dp"
-                    android:text="@string/headline2"
+                    android:text="@string/gittyreporter_headline2"
                     android:gravity="bottom"
                     android:paddingLeft="16dp"
                     android:paddingBottom="16dp"
-                    android:textColor="@color/text"
+                    android:textColor="@color/gittyreporter_text"
                     android:textSize="@dimen/abc_text_size_display_1_material"/>
                 <android.support.v7.widget.CardView
                     android:layout_width="fill_parent"
@@ -125,63 +125,63 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="32dp">
                             <EditText
-                                android:id="@+id/login_username"
+                                android:id="@+id/gittyreporter_login_username"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
                                 android:textSize="@dimen/abc_text_size_body_2_material"
-                                android:hint="@string/login_username"/>
+                                android:hint="@string/gittyreporter_login_username"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:paddingBottom="32dp">
                             <EditText
-                                android:id="@+id/login_password"
+                                android:id="@+id/gittyreporter_login_password"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
                                 android:textSize="@dimen/abc_text_size_body_2_material"
-                                android:hint="@string/login_password"/>
+                                android:hint="@string/gittyreporter_login_password"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.v7.widget.AppCompatCheckBox
-                            android:id="@+id/github_checkbox"
+                            android:id="@+id/gittyreporter_github_checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:text="@string/login_skip"/>
+                            android:text="@string/gittyreporter_login_skip"/>
                         <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/github_register"
+                            android:id="@+id/gittyreporter_github_register"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:visibility="gone"
                             android:onClick="openGitHubRegisterPage"
-                            android:text="@string/login_skip"/>
+                            android:text="@string/gittyreporter_login_skip"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
         </ScrollView>
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/doneFrame"
+        android:id="@+id/gittyreporter_doneFrame"
         android:focusable="true" android:focusableInTouchMode="true"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="invisible"
-        android:background="@color/done">
+        android:background="@color/gittyreporter_done">
         <ImageView
-            android:id="@+id/done_image"
+            android:id="@+id/gittyreporter_done_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_done_white_256dp_1x"/>
+            android:src="@drawable/gittyreporter_ic_done_white_256dp_1x"/>
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/material_ripple"
+        android:id="@+id/gittyreporter_material_ripple"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/primary2"
+        android:background="@color/gittyreporter_primary2"
         android:visibility="invisible"/>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -190,16 +190,16 @@
         android:layout_height="fill_parent">
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab_next"
+            android:id="@+id/gittyreporter_fab_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:onClick="showLoginPage"
-            android:src="@drawable/ic_arrow_forward_black_18dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/dark_accent"
-            fab:fab_colorRipple="@color/dark_accent" />
+            android:src="@drawable/gittyreporter_ic_arrow_forward_black_18dp"
+            fab:fab_colorNormal="@color/gittyreporter_accent"
+            fab:fab_colorPressed="@color/gittyreporter_dark_accent"
+            fab:fab_colorRipple="@color/gittyreporter_dark_accent" />
     </FrameLayout>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fab="http://schemas.android.com/apk/res-auto"
@@ -207,16 +207,16 @@
         android:layout_height="fill_parent">
 
         <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab_send"
+            android:id="@+id/gittyreporter_fab_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:onClick="reportIssue"
-            android:src="@drawable/ic_send_white_18dp"
-            fab:fab_colorNormal="@color/accent2"
-            fab:fab_colorPressed="@color/accent2_dark"
-            fab:fab_colorRipple="@color/accent2_dark" />
+            android:src="@drawable/gittyreporter_ic_send_white_18dp"
+            fab:fab_colorNormal="@color/gittyreporter_accent2"
+            fab:fab_colorPressed="@color/gittyreporter_accent2_dark"
+            fab:fab_colorRipple="@color/gittyreporter_accent2_dark" />
     </FrameLayout>
 </RelativeLayout>

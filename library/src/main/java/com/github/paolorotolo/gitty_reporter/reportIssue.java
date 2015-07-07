@@ -94,7 +94,7 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
                             // do nothing
                         }
                     })
-                    .setIcon(R.drawable.ic_mood_bad_black_24dp)
+                    .setIcon(R.drawable.gittyreporter_ic_mood_bad_black_24dp)
                     .show();
         } else {
             progress.dismiss();
@@ -106,7 +106,7 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
                             ((Activity)mContext).finish();
                         }
                     })
-                    .setIcon(R.drawable.ic_mood_bad_black_24dp)
+                    .setIcon(R.drawable.gittyreporter_ic_mood_bad_black_24dp)
                     .show();
         }
     }

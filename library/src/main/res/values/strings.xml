@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Gitty Reporter</string>
-    <string name="title">Title</string>
-    <string name="headline1">Report new Issue</string>
-    <string name="headline2">Log In on GitHub</string>
-    <string name="description">Describe your issue</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="device_info">Info about device:</string>
-    <string name="login_username">Username:</string>
-    <string name="login_password">Password:</string>
-    <string name="login_skip">I don\'t have an account</string>
+    <string name="gittyreporter_app_name">Gitty Reporter</string>
+    <string name="gittyreporter_title">Title</string>
+    <string name="gittyreporter_headline1">Report new Issue</string>
+    <string name="gittyreporter_headline2">Log In on GitHub</string>
+    <string name="gittyreporter_description">Describe your issue</string>
+    <string name="gittyreporter_hello_world">Hello world!</string>
+    <string name="gittyreporter_action_settings">Settings</string>
+    <string name="gittyreporter_device_info">Info about device:</string>
+    <string name="gittyreporter_login_username">Username:</string>
+    <string name="gittyreporter_login_password">Password:</string>
+    <string name="gittyreporter_login_skip">I don\'t have an account</string>
 </resources>

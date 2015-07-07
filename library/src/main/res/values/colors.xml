@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="dark_primary">#0097A7</color>
-    <color name="primary">#00BCD4</color>
-    <color name="primary2">#607D8B</color>
-    <color name="light_primary">#B2EBF2</color>
-    <color name="text">#FFFFFF</color>
-    <color name="accent">#FFC107</color>
-    <color name="accent2">#FF4081</color>
-    <color name="accent2_dark">#e53974</color>
-    <color name="dark_accent">#e5ad06</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#727272</color>
-    <color name="divider">#B6B6B6</color>
-    <color name="done">#43A047</color>
+    <color name="gittyreporter_dark_primary">#0097A7</color>
+    <color name="gittyreporter_primary">#00BCD4</color>
+    <color name="gittyreporter_primary2">#607D8B</color>
+    <color name="gittyreporter_light_primary">#B2EBF2</color>
+    <color name="gittyreporter_text">#FFFFFF</color>
+    <color name="gittyreporter_accent">#FFC107</color>
+    <color name="gittyreporter_accent2">#FF4081</color>
+    <color name="gittyreporter_accent2_dark">#e53974</color>
+    <color name="gittyreporter_dark_accent">#e5ad06</color>
+    <color name="gittyreporter_primary_text">#212121</color>
+    <color name="gittyreporter_secondary_text">#727272</color>
+    <color name="gittyreporter_divider">#B6B6B6</color>
+    <color name="gittyreporter_done">#43A047</color>
 </resources>

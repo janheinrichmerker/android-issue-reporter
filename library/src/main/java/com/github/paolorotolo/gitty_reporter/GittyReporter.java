@@ -57,25 +57,25 @@ public abstract class GittyReporter extends AppCompatActivity {
         setContentView(R.layout.gitty_reporter_layout);
 
         // Get Device info and print them in EditText
-        deviceInfoEditText = (EditText) findViewById(R.id.device_info);
+        deviceInfoEditText = (EditText) findViewById(R.id.gittyreporter_device_info);
         getDeviceInfo();
         deviceInfoEditText.setText(deviceInfo);
 
         init(savedInstanceState);
 
-        final View nextFab = findViewById(R.id.fab_next);
-        final View sendFab = findViewById(R.id.fab_send);
+        final View nextFab = findViewById(R.id.gittyreporter_fab_next);
+        final View sendFab = findViewById(R.id.gittyreporter_fab_send);
 
         if (!enableGitHubLogin){
             nextFab.setVisibility(View.INVISIBLE);
             sendFab.setVisibility(View.VISIBLE);
         }
 
-        AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
-        AppCompatButton registerButton = (AppCompatButton) findViewById(R.id.github_register);
+        AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.gittyreporter_github_checkbox);
+        AppCompatButton registerButton = (AppCompatButton) findViewById(R.id.gittyreporter_github_register);
 
-        final EditText userName = (EditText) findViewById(R.id.login_username);
-        final EditText userPassword = (EditText) findViewById(R.id.login_password);
+        final EditText userName = (EditText) findViewById(R.id.gittyreporter_login_username);
+        final EditText userPassword = (EditText) findViewById(R.id.gittyreporter_login_password);
 
         if (!enableGuestGitHubLogin){
             githubCheckbox.setChecked(false);
@@ -103,9 +103,9 @@ public abstract class GittyReporter extends AppCompatActivity {
 
     public void reportIssue (View v) {
         if (enableGitHubLogin) {
-            final AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.github_checkbox);
-            EditText userName = (EditText) findViewById(R.id.login_username);
-            EditText userPassword = (EditText) findViewById(R.id.login_password);
+            final AppCompatCheckBox githubCheckbox = (AppCompatCheckBox) findViewById(R.id.gittyreporter_github_checkbox);
+            EditText userName = (EditText) findViewById(R.id.gittyreporter_login_username);
+            EditText userPassword = (EditText) findViewById(R.id.gittyreporter_login_password);
 
             if (!githubCheckbox.isChecked()){
                 if (validateGitHubLogin()){
@@ -128,8 +128,8 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     private boolean validateGitHubLogin(){
-        EditText userName = (EditText) findViewById(R.id.login_username);
-        EditText userPassword = (EditText) findViewById(R.id.login_password);
+        EditText userName = (EditText) findViewById(R.id.gittyreporter_login_username);
+        EditText userPassword = (EditText) findViewById(R.id.gittyreporter_login_password);
 
         boolean hasErrors = false;
 
@@ -153,8 +153,8 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     private boolean validateBugReport(){
-        bugTitleEditText = (EditText) findViewById(R.id.bug_title);
-        bugDescriptionEditText = (EditText) findViewById(R.id.bug_description);
+        bugTitleEditText = (EditText) findViewById(R.id.gittyreporter_bug_title);
+        bugDescriptionEditText = (EditText) findViewById(R.id.gittyreporter_bug_description);
 
         boolean hasErrors = false;
 
@@ -194,8 +194,8 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     private void sendBugReport(){
-        bugTitleEditText = (EditText) findViewById(R.id.bug_title);
-        bugDescriptionEditText = (EditText) findViewById(R.id.bug_description);
+        bugTitleEditText = (EditText) findViewById(R.id.gittyreporter_bug_title);
+        bugDescriptionEditText = (EditText) findViewById(R.id.gittyreporter_bug_description);
         final String bugTitle = bugTitleEditText.getText().toString();
         final String bugDescription = bugDescriptionEditText.getText().toString();
 
@@ -214,9 +214,9 @@ public abstract class GittyReporter extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 animateLoginPage();
             } else {
-                View loginView = findViewById(R.id.loginFrame);
-                View nextFab = findViewById(R.id.fab_next);
-                View sendFab = findViewById(R.id.fab_send);
+                View loginView = findViewById(R.id.gittyreporter_loginFrame);
+                View nextFab = findViewById(R.id.gittyreporter_fab_next);
+                View sendFab = findViewById(R.id.gittyreporter_fab_send);
 
                 loginView.setVisibility(View.VISIBLE);
                 nextFab.setVisibility(View.INVISIBLE);
@@ -226,10 +226,10 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     private void animateLoginPage(){
-        final View colorView = findViewById(R.id.material_ripple);
-        final View loginView = findViewById(R.id.loginFrame);
-        final View nextFab = findViewById(R.id.fab_next);
-        final View sendFab = findViewById(R.id.fab_send);
+        final View colorView = findViewById(R.id.gittyreporter_material_ripple);
+        final View loginView = findViewById(R.id.gittyreporter_loginFrame);
+        final View nextFab = findViewById(R.id.gittyreporter_fab_next);
+        final View sendFab = findViewById(R.id.gittyreporter_fab_send);
 
         final AlphaAnimation fadeOutColorAnim = new AlphaAnimation(1.0f, 0.0f);
         fadeOutColorAnim.setDuration(400);
@@ -309,9 +309,9 @@ public abstract class GittyReporter extends AppCompatActivity {
     }
 
     public void showDoneAnimation(){
-        final View doneView = findViewById(R.id.doneFrame);
-        final View doneImage = findViewById(R.id.done_image);
-        final View sendFab = findViewById(R.id.fab_send);
+        final View doneView = findViewById(R.id.gittyreporter_doneFrame);
+        final View doneImage = findViewById(R.id.gittyreporter_done_image);
+        final View sendFab = findViewById(R.id.gittyreporter_fab_send);
 
         final AlphaAnimation fadeOutColorAnim = new AlphaAnimation(1.0f, 0.0f);
         fadeOutColorAnim.setDuration(1000);
@@ -409,10 +409,10 @@ public abstract class GittyReporter extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        View loginView = findViewById(R.id.loginFrame);
+        View loginView = findViewById(R.id.gittyreporter_loginFrame);
         if (loginView.getVisibility() == View.VISIBLE){
-            View nextFab = findViewById(R.id.fab_next);
-            View sendFab = findViewById(R.id.fab_send);
+            View nextFab = findViewById(R.id.gittyreporter_fab_next);
+            View sendFab = findViewById(R.id.gittyreporter_fab_send);
 
             loginView.setVisibility(View.INVISIBLE);
             nextFab.setVisibility(View.VISIBLE);
