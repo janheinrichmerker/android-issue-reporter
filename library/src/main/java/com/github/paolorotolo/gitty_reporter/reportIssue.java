@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
 import org.eclipse.egit.github.core.Issue;
@@ -18,10 +19,12 @@ import java.util.List;
 public class reportIssue extends AsyncTask<String, Integer, String> {
 
     Context mContext;
+    GittyReporter mActivity;
     ProgressDialog progress;
 
-    public reportIssue (Context context){
+    public reportIssue (Context context, GittyReporter activity){
         mContext = context;
+        mActivity = activity;
     }
 
     // Runs in UI before background thread is called
@@ -76,7 +79,11 @@ public class reportIssue extends AsyncTask<String, Integer, String> {
         super.onPostExecute(result);
         if (result.equals("ok")) {
             progress.dismiss();
-            ((Activity)mContext).finish();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mActivity.showDoneAnimation();
+            } else {
+                ((Activity) mContext).finish();
+            }
         } else if (result.equals("org.eclipse.egit.github.core.client.RequestException: Bad credentials (401)")){
             progress.dismiss();
             new AlertDialog.Builder(mContext)

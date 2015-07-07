@@ -29,8 +29,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.eclipse.egit.github.core.Issue;
+import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.IssueService;
+import org.eclipse.egit.github.core.service.RepositoryService;
+
 import java.io.IOException;
 
 public abstract class GittyReporter extends AppCompatActivity {
@@ -203,7 +206,7 @@ public abstract class GittyReporter extends AppCompatActivity {
             this.gitPassword = "";
         }
 
-        new reportIssue(GittyReporter.this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo, gitToken, enableGitHubLogin.toString());
+        new reportIssue(GittyReporter.this, this).execute(gitUser, gitPassword, bugTitle, bugDescription, deviceInfo, targetUser, targetRepository, extraInfo, gitToken, enableGitHubLogin.toString());
     }
 
     public void showLoginPage (View v) {
@@ -302,6 +305,84 @@ public abstract class GittyReporter extends AppCompatActivity {
         });
 
         colorView.setVisibility(View.VISIBLE);
+        rippleAnim.start();
+    }
+
+    public void showDoneAnimation(){
+        final View doneView = findViewById(R.id.doneFrame);
+        final View doneImage = findViewById(R.id.done_image);
+        final View sendFab = findViewById(R.id.fab_send);
+
+        final AlphaAnimation fadeOutColorAnim = new AlphaAnimation(1.0f, 0.0f);
+        fadeOutColorAnim.setDuration(1000);
+        fadeOutColorAnim.setInterpolator(new AccelerateInterpolator());
+        final AlphaAnimation fadeOutFabAnim = new AlphaAnimation(1.0f, 0.0f);
+        fadeOutFabAnim.setDuration(400);
+        fadeOutFabAnim.setInterpolator(new AccelerateInterpolator());
+
+        fadeOutColorAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                doneImage.setVisibility(View.INVISIBLE);
+                finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fadeOutFabAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                sendFab.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        int cx = (doneView.getRight());
+        int cy = (doneView.getBottom());
+        int finalRadius = Math.max(doneView.getWidth(), doneView.getHeight());
+
+        Animator rippleAnim =
+                ViewAnimationUtils.createCircularReveal(doneView, cx, cy, 0, finalRadius);
+
+        rippleAnim.setInterpolator(new AccelerateInterpolator());
+        rippleAnim.addListener(new android.animation.Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(android.animation.Animator animation) {
+                sendFab.startAnimation(fadeOutFabAnim);
+            }
+
+            @Override
+            public void onAnimationRepeat(android.animation.Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(android.animation.Animator animation) {
+                doneImage.startAnimation(fadeOutColorAnim);
+
+            }
+
+            @Override
+            public void onAnimationCancel(android.animation.Animator animation) {
+            }
+        });
+
+        doneView.setVisibility(View.VISIBLE);
         rippleAnim.start();
     }
 

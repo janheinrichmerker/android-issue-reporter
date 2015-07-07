@@ -13,6 +13,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:id="@+id/scrollReport"
         android:fillViewport="true"
         android:scrollbars="none"
         android:paddingLeft="@dimen/card_padding"
@@ -26,6 +27,7 @@
                 android:layout_height="192dp"
                 android:text="@string/headline1"
                 android:gravity="bottom"
+                android:paddingLeft="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/text"
                 android:textSize="@dimen/abc_text_size_display_1_material"/>
@@ -81,7 +83,6 @@
         </LinearLayout>
     </ScrollView>
     </FrameLayout>
-
     <FrameLayout
         android:id="@+id/loginFrame"
         android:visibility="invisible"
@@ -92,6 +93,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:fillViewport="true"
+            android:id="@+id/scrollLogin"
             android:scrollbars="none"
             android:paddingLeft="@dimen/card_padding"
             android:paddingRight="@dimen/card_padding">
@@ -104,6 +106,7 @@
                     android:layout_height="192dp"
                     android:text="@string/headline2"
                     android:gravity="bottom"
+                    android:paddingLeft="16dp"
                     android:paddingBottom="16dp"
                     android:textColor="@color/text"
                     android:textSize="@dimen/abc_text_size_display_1_material"/>
@@ -161,6 +164,20 @@
         </ScrollView>
     </FrameLayout>
     <FrameLayout
+        android:id="@+id/doneFrame"
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="invisible"
+        android:background="@color/done">
+        <ImageView
+            android:id="@+id/done_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_done_white_256dp_1x"/>
+    </FrameLayout>
+    <FrameLayout
         android:id="@+id/material_ripple"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -179,7 +196,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:onClick="showLoginPage"
-            android:src="@drawable/ic_navigate_next_black_24dp"
+            android:src="@drawable/ic_arrow_forward_black_18dp"
             fab:fab_colorNormal="@color/accent"
             fab:fab_colorPressed="@color/dark_accent"
             fab:fab_colorRipple="@color/dark_accent" />
