@@ -11,5 +11,7 @@ public class GittyReporterNoGuestExample extends GittyReporter {
         enableGuestGitHubLogin(false);
         setGuestOAuth2Token("28f479f73db97d912611b27579aad7a76ad2baf5");
         setExtraInfo("Example string");
+
+        canEditDebugInfo(true);
     }
 }

@@ -74,8 +74,8 @@
                             android:id="@+id/gittyreporter_device_info"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
                             android:textSize="@dimen/abc_text_size_body_2_material"
+                            android:enabled="false"
                             android:hint="@string/gittyreporter_device_info"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>

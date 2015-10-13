@@ -3,9 +3,11 @@ package com.github.paolorotolo.gitty_reporter;
 import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import android.view.animation.Animation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -407,6 +410,34 @@ public abstract class GittyReporter extends AppCompatActivity {
         this.enableGuestGitHubLogin = enableGuest;
     }
 
+    public void canEditDebugInfo(boolean canEdit){
+        deviceInfoEditText.setEnabled(canEdit);
+    }
+
+    public void setFabColor1(int colorNormal, int colorPressed, int colorRipple){
+        final com.melnykov.fab.FloatingActionButton nextFab = (com.melnykov.fab.FloatingActionButton) findViewById(R.id.gittyreporter_fab_next);
+        nextFab.setColorNormal(colorNormal);
+        nextFab.setColorPressed(colorPressed);
+        nextFab.setColorRipple(colorRipple);
+    }
+
+    public void setFabColor2(int colorNormal, int colorPressed, int colorRipple){
+        final com.melnykov.fab.FloatingActionButton sendFab = (com.melnykov.fab.FloatingActionButton) findViewById(R.id.gittyreporter_fab_send);
+        sendFab.setColorNormal(colorNormal);
+        sendFab.setColorPressed(colorPressed);
+        sendFab.setColorRipple(colorRipple);
+    }
+
+    public void setBackgroundColor1(int color){
+        FrameLayout view = (FrameLayout) findViewById(R.id.gittyreporter_reportFrame);
+        view.setBackgroundColor(color);
+    }
+
+    public void setBackgroundColor2(int color){
+        FrameLayout view = (FrameLayout) findViewById(R.id.gittyreporter_loginFrame);
+        view.setBackgroundColor(color);
+    }
+
     @Override
     public void onBackPressed() {
         View loginView = findViewById(R.id.gittyreporter_loginFrame);
@@ -441,11 +472,7 @@ public abstract class GittyReporter extends AppCompatActivity {
             s += "\n CPU_ABI: "         + android.os.Build.CPU_ABI;
             s += "\n CPU_ABI2: "        + android.os.Build.CPU_ABI2;
             s += "\n HARDWARE: "        + android.os.Build.HARDWARE;
-            s += "\n Build ID: "        + android.os.Build.ID;
             s += "\n MANUFACTURER: "    + android.os.Build.MANUFACTURER;
-            s += "\n SERIAL: "          + android.os.Build.SERIAL;
-            s += "\n USER: "            + android.os.Build.USER;
-            s += "\n HOST: "            + android.os.Build.HOST;
 
             deviceInfo = s;
         } catch (Exception e) {

@@ -10,4 +10,5 @@
     <string name="gittyreporter_login_username">Username:</string>
     <string name="gittyreporter_login_password">Password:</string>
     <string name="gittyreporter_login_skip">I don\'t have an account</string>
+    <string name="title_activity_oauth">OAuthActivity</string>
 </resources>
