@@ -80,4 +80,5 @@ On >= Lollipop, it also includes material animations [watch them in HD](https://
 I've uploaded an example app here on GitHub. Check it out! It's also available on [Google Play](https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example).
 
 ## Apps using it
- * Some apps at **Numix Project** Ltd. We created a GitHub bot named [numix-ood](https://github.com/numix-ood) (*Doctor Who anyone?*).
+ * Some apps at **Numix Project** Ltd. We've created a GitHub bot named [numix-ood](https://github.com/numix-ood) (*Doctor Who anyone?*).
+ * [Glucosio](http://www.glucosio.org/).
