@@ -140,7 +140,6 @@
                                 android:id="@+id/gittyreporter_login_password"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="textPassword"
                                 android:textSize="@dimen/abc_text_size_body_2_material"
                                 android:hint="@string/gittyreporter_login_password"/>
                         </android.support.design.widget.TextInputLayout>

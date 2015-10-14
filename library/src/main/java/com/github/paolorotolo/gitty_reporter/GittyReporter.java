@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,6 +81,9 @@ public abstract class GittyReporter extends AppCompatActivity {
 
         final EditText userName = (EditText) findViewById(R.id.gittyreporter_login_username);
         final EditText userPassword = (EditText) findViewById(R.id.gittyreporter_login_password);
+
+        userPassword.setTypeface(Typeface.DEFAULT);
+        userPassword.setTransformationMethod(new PasswordTransformationMethod());
 
         if (!enableGuestGitHubLogin){
             githubCheckbox.setChecked(false);
