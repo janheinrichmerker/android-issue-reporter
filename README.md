@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.paolorotolo:gitty_reporter:1.1.1'
+  compile 'com.github.paolorotolo:gitty_reporter:1.2.0'
 }
 ```
 
@@ -55,8 +55,17 @@ public class Gitty extends GittyReporter {
         // If false, Gitty will redirect non registred users to github.com/join
         enableGuestGitHubLogin(true);
         
-        // Include other relevant info in your bug report (like custom variables). 
+        // Include other relevant info in your bug report (like custom variables)
         setExtraInfo("Example string");
+        
+        // Allow users to edit debug info (default: false)
+        canEditDebugInfo(true)
+        
+        // Customize Gitty appearance
+        setFabColor1(int colorNormal, int colorPressed, int colorRipple);
+        setFabColor2(int colorNormal, int colorPressed, int colorRipple);
+        setBackgroundColor1(int color);
+        setBackgroundColor2(int color);
     }
 }
 ```
