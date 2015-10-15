@@ -443,7 +443,7 @@ public abstract class GittyReporter extends AppCompatActivity {
         view.setBackgroundColor(color);
     }
 
-    public void setMaterialRippleColor(int color){
+    public void setRippleColor(int color){
         FrameLayout ripple = (FrameLayout) findViewById(R.id.gittyreporter_material_ripple);
         ripple.setBackgroundColor(color);
     }
