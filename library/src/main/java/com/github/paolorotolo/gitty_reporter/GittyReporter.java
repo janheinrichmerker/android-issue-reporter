@@ -443,9 +443,20 @@ public abstract class GittyReporter extends AppCompatActivity {
         view.setBackgroundColor(color);
     }
 
-    public void setMaterialRippleColor(int color){
+    public void setRippleColor(int color){
         FrameLayout ripple = (FrameLayout) findViewById(R.id.gittyreporter_material_ripple);
         ripple.setBackgroundColor(color);
+    }
+
+    public void setTitlecolor1(int color){
+        TextView view = (TextView) findViewById(R.id.gittyreporter_title_1);
+        view.setTextColor(color);
+    }
+
+    public void setTitlecolor2(int color){
+        TextView view = (TextView) findViewById(R.id.gittyreporter_title_2);
+        view.setTextColor(color);
+
     }
 
     @Override
