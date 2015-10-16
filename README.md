@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.paolorotolo:gitty_reporter:1.2.0'
+  compile 'com.github.paolorotolo:gitty_reporter:1.2.1'
 }
 ```
 
