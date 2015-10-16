@@ -59,14 +59,14 @@ public class Gitty extends GittyReporter {
         setExtraInfo("Example string");
         
         // Allow users to edit debug info (default: false)
-        canEditDebugInfo(true)
+        canEditDebugInfo(true);
         
         // Customize Gitty appearance
         setFabColor1(int colorNormal, int colorPressed, int colorRipple);
         setFabColor2(int colorNormal, int colorPressed, int colorRipple);
         setBackgroundColor1(int color);
         setBackgroundColor2(int color);
-        setMaterialRippleColor(int color);
+        setRippleColor(int color);
     }
 }
 ```
