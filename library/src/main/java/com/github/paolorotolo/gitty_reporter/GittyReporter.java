@@ -448,6 +448,17 @@ public abstract class GittyReporter extends AppCompatActivity {
         ripple.setBackgroundColor(color);
     }
 
+    public void setTitlecolor1(int color){
+        TextView view = (TextView) findViewById(R.id.gittyreporter_title_1);
+        view.setTextColor(color);
+    }
+
+    public void setTitlecolor2(int color){
+        TextView view = (TextView) findViewById(R.id.gittyreporter_title_2);
+        view.setTextColor(color);
+
+    }
+
     @Override
     public void onBackPressed() {
         View loginView = findViewById(R.id.gittyreporter_loginFrame);

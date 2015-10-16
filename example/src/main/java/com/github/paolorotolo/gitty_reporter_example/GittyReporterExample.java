@@ -1,6 +1,5 @@
 package com.github.paolorotolo.gitty_reporter_example;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.paolorotolo.gitty_reporter.GittyReporter;
