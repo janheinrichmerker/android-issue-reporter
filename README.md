@@ -66,6 +66,7 @@ public class Gitty extends GittyReporter {
         setFabColor2(int colorNormal, int colorPressed, int colorRipple);
         setBackgroundColor1(int color);
         setBackgroundColor2(int color);
+        setMaterialRippleColor(int color);
     }
 }
 ```
