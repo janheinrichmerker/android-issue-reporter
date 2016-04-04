@@ -1,32 +1,38 @@
-# Gitty Reporter
-[![Maven Central](https://img.shields.io/badge/maven--central-gitty--reporter-green.svg
-)](http://search.maven.org/#browse%7C-77465355)
-<br><a href="https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example">
-  <img alt="Get it on Google Play"
-       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
-</a>
 
-Watch complete video on [YouTube](https://www.youtube.com/watch?v=woYUOilPrpY).
+android-issue-reporter
+===============
 
-*Is your Inbox full of bug reports and requests from your users?* <br>
-**Gitty Reporter is a new material designed library to report issues from your app directly on GitHub, even without an account.**
+[![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/android-issue-reporter.svg)](https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter)
+[![Build Status](https://travis-ci.org/HeinrichReimer/android-issue-reporter.svg?branch=master)](https://travis-ci.org/HeinrichReimer/android-issue-reporter)
+[![Apache License 2.0](https://img.shields.io/github/license/HeinrichReimer/android-issue-reporter.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-<img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait.png" width="300">
-<img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/portrait2.png" width="300">
-<img src="https://github.com/PaoloRotolo/GittyReporter/blob/master/art/landscape.png" width="600">
+Based on [Paolo Rotolo](https://github.com/PaoloRotolo)'s [Gitty Reporter](https://github.com/PaoloRotolo/GittyReporter)
 
-## How to use
-Add this to your **build.gradle**:
-```java
+Is your Inbox full of bug reports and requests from your users?
+
+*android-issue-reporter* is a new material designed library to report issues from your app directly to GitHub, even without an account.
+
+Dependency
+----------
+
+*android-issue-reporter* is available on [**jitpack.io**][J]
+
+**Gradle dependency:**
+````gradle
 repositories {
-    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
-
+````
+````gradle
 dependencies {
-  compile 'com.github.paolorotolo:gitty_reporter:1.2.1'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:-SNAPSHOT'
 }
-```
+````
 
+Get the latest dependency at [jitpack.io][J].
+
+How to use
+-----------
 Create a new **Activity that extends GittyReporter**:
 
 ```java
@@ -71,15 +77,4 @@ public class Gitty extends GittyReporter {
 }
 ```
 
-## Featuring Material Design
-Gitty Reporter follows Google's material design guidelines.
-On >= Lollipop, it also includes material animations [watch them in HD](https://www.youtube.com/watch?v=woYUOilPrpY).
-
-![](https://raw.githubusercontent.com/PaoloRotolo/GittyReporter/master/art/gitty.gif)
-
-## Example
-I've uploaded an example app here on GitHub. Check it out! It's also available on [Google Play](https://play.google.com/store/apps/details?id=com.github.paolorotolo.gitty_reporter_example).
-
-## Apps using it
- * Some apps at **Numix Project** Ltd. We've created a GitHub bot named [numix-ood](https://github.com/numix-ood) (*Doctor Who anyone?*).
- * [Glucosio](http://www.glucosio.org/).
+[J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter
