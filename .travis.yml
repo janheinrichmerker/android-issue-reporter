@@ -22,3 +22,11 @@ android:
     # if you need to run emulator(s) during your tests
     # - sys-img-armeabi-v7a-android-19
     # - sys-img-x86-android-17
+
+  licenses:
+    - 'android-sdk-license-.+'
+    
+env:
+  global:
+    # Install timeout in minutes (Default: 2 min)
+    - ADB_INSTALL_TIMEOUT=10
