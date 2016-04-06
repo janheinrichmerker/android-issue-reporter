@@ -25,7 +25,7 @@ Screenshots
 
 | ![material-drawer](http://i.imgur.com/ADkPQMo.png) | ![material-drawer](http://i.imgur.com/fcFmJ5E.png) | ![material-drawer](http://i.imgur.com/dJYonBW.png) |
 |:-:|:-:|:-:|
-| GitHub Bot | Include device info | Demo |
+| GitHub bot | Include device info | Demo |
 
 Dependency
 ----------
@@ -48,7 +48,7 @@ Get the latest dependency at [jitpack.io][J].
 
 How to use
 -----------
-Create a new **Activity that extends GittyReporter**:
+Just create a new `Activity` that extends `IssueReporterActivity`:
 
 ```java
 public class ExampleReporterActivity extends IssueReporterActivity {
