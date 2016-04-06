@@ -23,18 +23,6 @@ public class Report {
     }
 
     public String getDescription() {
-        return description;
-    }
-
-    public DeviceInfo getDeviceInfo() {
-        return deviceInfo;
-    }
-
-    public ExtraInfo getExtraInfo() {
-        return extraInfo;
-    }
-
-    public String getIssueDescriptionMarkdown() {
         return description + "\n\n"
                 + "-\n\n"
                 + deviceInfo.toMarkdown() + "\n\n"

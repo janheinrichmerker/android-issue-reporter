@@ -10,40 +10,42 @@ import android.support.annotation.IntRange;
 import java.util.Arrays;
 
 public class DeviceInfo {
-    private int versionCode;
-    private String versionName;
-    private String buildVersion = Build.VERSION.INCREMENTAL;
-    private String releaseVersion = Build.VERSION.RELEASE;
+    private final int versionCode;
+    private final String versionName;
+    private final String buildVersion = Build.VERSION.INCREMENTAL;
+    private final String releaseVersion = Build.VERSION.RELEASE;
     @IntRange(from = 0)
-    private int sdkVersion = Build.VERSION.SDK_INT;
-    private String buildID = Build.DISPLAY;
-    private String brand = Build.BRAND;
-    private String manufacturer = Build.MANUFACTURER;
-    private String device = Build.DEVICE;
-    private String model = Build.MODEL;
-    private String product = Build.PRODUCT;
-    private String hardware = Build.HARDWARE;
-
+    private final int sdkVersion = Build.VERSION.SDK_INT;
+    private final String buildID = Build.DISPLAY;
+    private final String brand = Build.BRAND;
+    private final String manufacturer = Build.MANUFACTURER;
+    private final String device = Build.DEVICE;
+    private final String model = Build.MODEL;
+    private final String product = Build.PRODUCT;
+    private final String hardware = Build.HARDWARE;
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
-    private String[] abis = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+    private final String[] abis = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_ABIS : new String[]{Build.CPU_ABI, Build.CPU_ABI2};
-
     @SuppressLint("NewApi")
-    private String[] abis32Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+    private final String[] abis32Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_32_BIT_ABIS : null;
-
     @SuppressLint("NewApi")
-    private String[] abis64Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+    private final String[] abis64Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_64_BIT_ABIS : null;
 
     public DeviceInfo(Context context) {
+        PackageInfo packageInfo;
         try {
-            PackageInfo packageInfo = context.getPackageManager()
+            packageInfo = context.getPackageManager()
                     .getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            packageInfo = null;
+        }
+        if (packageInfo != null) {
             versionCode = packageInfo.versionCode;
             versionName = packageInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
+        } else {
             versionCode = -1;
             versionName = null;
         }

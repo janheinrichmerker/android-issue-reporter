@@ -166,8 +166,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private void reportIssue() {
 
-        if (!validateInput())
-            return;
+        if (!validateInput()) return;
 
         if (optionUseAccount.isChecked()) {
             String username = inputUsername.getText().toString();
@@ -254,13 +253,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     }
 
     private static class ReportIssueTask extends AsyncTask<Void, Void, String> {
-        private Activity activity;
+        private final Activity activity;
 
-        private Report report;
+        private final Report report;
 
-        private GithubTarget target;
+        private final GithubTarget target;
 
-        private GithubLogin login;
+        private final GithubLogin login;
 
         private Dialog progress;
 
@@ -296,7 +295,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                 client = new GitHubClient().setCredentials(login.getUsername(), login.getPassword());
             }
 
-            Issue issue = new Issue().setTitle(report.getTitle()).setBody(report.getIssueDescriptionMarkdown());
+            Issue issue = new Issue().setTitle(report.getTitle()).setBody(report.getDescription());
             try {
                 new IssueService(client).createIssue(target.getUsername(), target.getRepository(), issue);
                 return RESULT_OK;

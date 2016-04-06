@@ -12,7 +12,7 @@ import com.heinrichreimersoftware.androidissuereporter.R;
 
 public class ThemeUtils {
     @ColorInt
-    public static int[] resolveThemeColors(@NonNull Context context, @AttrRes @StyleableRes int[] attrs, @ColorInt int[] defaultColors) {
+    private static int[] resolveThemeColors(@NonNull Context context, @AttrRes @StyleableRes int[] attrs, @ColorInt int[] defaultColors) {
         if (attrs.length != defaultColors.length)
             throw new IllegalArgumentException("Argument attrs must be the same size as defaultColors");
         TypedValue typedValue = new TypedValue();
@@ -29,13 +29,8 @@ public class ThemeUtils {
     }
 
     @ColorInt
-    public static int resolveThemeColor(@NonNull Context context, @AttrRes @StyleableRes int attr, @ColorInt int defaultColor) {
-        return resolveThemeColors(context, new int[]{attr}, new int[]{defaultColor})[0];
-    }
-
-    @ColorInt
-    public static int resolveThemeColor(@NonNull Context context, @AttrRes @StyleableRes int attr) {
-        return resolveThemeColor(context, attr, 0);
+    private static int resolveThemeColor(@NonNull Context context, @AttrRes @StyleableRes int attr) {
+        return resolveThemeColors(context, new int[]{attr}, new int[]{0})[0];
     }
 
     @ColorInt

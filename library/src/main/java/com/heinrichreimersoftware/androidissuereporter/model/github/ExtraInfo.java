@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ExtraInfo {
-    private Map<String, String> extraInfo = new LinkedHashMap<>();
+    private final Map<String, String> extraInfo = new LinkedHashMap<>();
 
     public void put(String key, String value) {
         extraInfo.put(key, value);
