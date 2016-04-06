@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardBackgroundColor="?cardBackgroundColor"
-    app:cardUseCompatPadding="true">
+    app:cardBackgroundColor="?cardBackgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +27,10 @@
                 android:id="@+id/air_optionUseAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/air_radio_button_padding_start"
+                android:paddingRight="0dp"
+                android:paddingStart="@dimen/air_radio_button_padding_start"
+                android:paddingEnd="0dp"
                 android:text="@string/air_label_use_account"
                 android:layout_marginTop="@dimen/air_baseline"
                 android:checked="true"/>
@@ -83,6 +86,10 @@
                 android:id="@+id/air_optionAnonymous"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/air_radio_button_padding_start"
+                android:paddingRight="0dp"
+                android:paddingStart="@dimen/air_radio_button_padding_start"
+                android:paddingEnd="0dp"
                 android:text="@string/air_label_use_guest"
                 android:layout_marginTop="@dimen/air_baseline"/>
 

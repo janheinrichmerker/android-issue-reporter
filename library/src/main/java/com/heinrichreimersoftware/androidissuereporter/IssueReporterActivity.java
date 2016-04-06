@@ -11,6 +11,8 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -115,6 +117,16 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private void initViews() {
         setSupportActionBar(toolbar);
+
+        if (NavUtils.getParentActivityName(this) != null) {
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+            toolbar.setContentInsetsRelative(
+                    getResources().getDimensionPixelSize(R.dimen.air_baseline_content),
+                    getResources().getDimensionPixelSize(R.dimen.air_baseline));
+        }
 
         buttonDeviceInfo.setOnClickListener(new View.OnClickListener() {
             @Override
