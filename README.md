@@ -36,43 +36,26 @@ How to use
 Create a new **Activity that extends GittyReporter**:
 
 ```java
-public class Gitty extends GittyReporter {
-
-    // Please DO NOT override onCreate. Use init instead.
+public class ExampleReporterActivity extends IssueReporterActivity {
+    //Where should the issues go?
+    //(http://github.com/username/repository)
     @Override
-    public void init(Bundle savedInstanceState) {
-        
-        // Set where Gitty will send issues.
-        // (username, repository name);
-        setTargetRepository("paolorotolo", "GittyReporter");
-        
-        // Set Auth token to open issues if user doesn't have a GitHub account
-        // For example, you can register a bot account on GitHub that will open bugs for you. 
-        setGuestOAuth2Token("28f479f73db97d912611b27579aad7a76ad2baf5");
-        
-        
-        // OPTIONAL METHODS
+    public GithubTarget getTarget() {
+        return new GithubTarget("HeinrichReimer", "android-issue-reporter");
+    }
 
-        // Set if User can send bugs with his own GitHub account (default: true)
-        // If false, Gitty will always use your Auth token
-        enableUserGitHubLogin(true);
-        
-        // Set if Gitty can use your Auth token for users without a GitHub account (default: true)
-        // If false, Gitty will redirect non registred users to github.com/join
-        enableGuestGitHubLogin(true);
-        
-        // Include other relevant info in your bug report (like custom variables)
-        setExtraInfo("Example string");
-        
-        // Allow users to edit debug info (default: false)
-        canEditDebugInfo(true);
-        
-        // Customize Gitty appearance
-        setFabColor1(int colorNormal, int colorPressed, int colorRipple);
-        setFabColor2(int colorNormal, int colorPressed, int colorRipple);
-        setBackgroundColor1(int color);
-        setBackgroundColor2(int color);
-        setRippleColor(int color);
+    //[Optional] Auth token to open issues if users don't have a GitHub account
+    //You can register a bot account on GitHub and copy ist OAuth2 token here. 
+    @Override
+    public String getGuestToken() {
+        return "28f479f73db97d912611b27579aad7a76ad2baf5";
+    }
+
+    //[Optional] Include other relevant info in the bug report (like custom variables)
+    @Override
+    public void onSaveExtraInfo(ExtraInfo extraInfo) {
+        extraInfo.put("Test 1", "Example string");
+        extraInfo.put("Test 2", true);
     }
 }
 ```
