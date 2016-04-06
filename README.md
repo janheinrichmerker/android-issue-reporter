@@ -40,7 +40,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:-SNAPSHOT'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.3'
 }
 ````
 
