@@ -1,14 +1,33 @@
 <resources>
-    <string name="gittyreporter_app_name">Gitty Reporter</string>
-    <string name="gittyreporter_title">Title</string>
-    <string name="gittyreporter_headline1">Report new Issue</string>
-    <string name="gittyreporter_headline2">Log In on GitHub</string>
-    <string name="gittyreporter_description">Describe your issue</string>
-    <string name="gittyreporter_hello_world">Hello world!</string>
-    <string name="gittyreporter_action_settings">Settings</string>
-    <string name="gittyreporter_device_info">Info about device:</string>
-    <string name="gittyreporter_login_username">Username:</string>
-    <string name="gittyreporter_login_password">Password:</string>
-    <string name="gittyreporter_login_skip">I don\'t have an account</string>
-    <string name="title_activity_oauth">OAuthActivity</string>
+    <string name="air_title_report_issue">Report issue</string>
+
+    <string name="air_title_issue">Issue</string>
+    <string name="air_title_login">Login</string>
+
+    <string name="air_label_issue_title">Title</string>
+    <string name="air_label_issue_description">Description</string>
+    <string name="air_label_device_info">Device info</string>
+
+    <string name="air_label_use_account">Send using GitHub account</string>
+    <string name="air_label_use_guest">Send anonymously</string>
+    <string name="air_label_username">Username</string>
+    <string name="air_label_password">Password</string>
+    <string name="air_label_no_account">I don\'t have an account</string>
+
+    <string name="air_error_no_title">Please enter an issue title</string>
+    <string name="air_error_no_description">Please enter an issue description</string>
+    <string name="air_error_no_username">Please enter your valid GitHub username</string>
+    <string name="air_error_no_password">Please enter your valid GitHub password</string>
+
+    <string name="air_content_description_done">Done</string>
+
+    <string name="air_dialog_title_loading">Uploading report to GitHub</string>
+    <string name="air_dialog_title_failed">Unable to send report</string>
+    <string name="air_dialog_description_failed_wrong_credentials">Wrong username or password</string>
+    <string name="air_dialog_description_failed_wrong_credentials_token">Invalid access token. Please contact the app developer.</string>
+    <string name="air_dialog_action_failed_wrong_credentials">Try again</string>
+    <string name="air_dialog_description_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
+    <string name="air_dialog_action_failed_issues_not_available">OK</string>
+    <string name="air_dialog_description_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
+    <string name="air_dialog_action_failed_unknown">OK</string>
 </resources>

@@ -1,12 +1,9 @@
 <resources>
-    <string name="app_name">Gitty Reporter Example</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">android-issue-reporter Demo</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="welcome">Welcome! Test Gitty Reporter here.</string>
-    <string name="gitty">Start default Gitty</string>
-    <string name="gitty_no_guest">Disable Guest login</string>
-    <string name="gitty_no_login">Disable User login</string>
-    <string name="note">All reports will return an error because the token shipped with this example app is not valid. \n\n  Please read on GitHub how to integrate Gitty Reporter with your app.</string>
+    <string name="description_android_issue_reporter">A powerful and simple library to open issues on GitHub directly from your app.</string>
+    <string name="label_option_guest_token">Enable guest token</string>
+    <string name="label_open_reporter">Open issue reporter</string>
+    <string name="title_token_not_working">Note:</string>
+    <string name="description_token_not_working">Reports sent from this sample app will only work when entering a GitHub login because the included token is not valid.\nRefer to the GitHub repo for a tutorial on how to use a guest token.</string>
 </resources>

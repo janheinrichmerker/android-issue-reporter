@@ -1,10 +1,7 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="gittyreporter_activity_horizontal_margin">16dp</dimen>
-    <dimen name="gittyreporter_activity_vertical_margin">16dp</dimen>
-    <dimen name="gittyreporter_card_padding">8dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="air_baseline">16dp</dimen>
+    <dimen name="air_baseline_half">8dp</dimen>
+    <dimen name="air_baseline_card">@dimen/air_baseline_half</dimen>
+
+    <dimen name="air_icon_padding">6dp</dimen>
 </resources>
