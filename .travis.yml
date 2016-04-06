@@ -25,8 +25,3 @@ android:
 
   licenses:
     - 'android-sdk-license-.+'
-    
-env:
-  global:
-    # Install timeout in minutes (Default: 2 min)
-    - ADB_INSTALL_TIMEOUT=10
