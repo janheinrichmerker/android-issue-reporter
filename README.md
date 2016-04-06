@@ -12,6 +12,21 @@ Is your Inbox full of bug reports and requests from your users?
 
 *android-issue-reporter* is a new material designed library to report issues from your app directly to GitHub, even without an account.
 
+Demo
+----
+A demo app is available on Google Play:
+
+<a href="https://play.google.com/store/apps/details?id=com.heinrichreimersoftware.androidissuereporter.example">
+	<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60" />
+</a>
+
+Screenshots
+-----------
+
+| ![material-drawer](http://i.imgur.com/ADkPQMo.png) | ![material-drawer](http://i.imgur.com/fcFmJ5E.png) | ![material-drawer](http://i.imgur.com/dJYonBW.png) |
+|:-:|:-:|:-:|
+| GitHub Bot | Include device info | Demo |
+
 Dependency
 ----------
 
