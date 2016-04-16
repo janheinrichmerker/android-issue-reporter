@@ -2,10 +2,12 @@ package com.heinrichreimersoftware.androidissuereporter;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
@@ -42,6 +44,7 @@ import org.eclipse.egit.github.core.service.IssueService;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.WeakReference;
 
 public abstract class IssueReporterActivity extends AppCompatActivity {
 
@@ -266,16 +269,10 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         return null;
     }
 
-    private static class ReportIssueTask extends AsyncTask<Void, Void, String> {
-        private final Activity activity;
-
+    private static class ReportIssueTask extends DialogAsyncTask<Void, Void, String> {
         private final Report report;
-
         private final GithubTarget target;
-
         private final GithubLogin login;
-
-        private Dialog progress;
 
         public static void report(Activity activity, Report report, GithubTarget target,
                                   GithubLogin login) {
@@ -284,16 +281,15 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         private ReportIssueTask(Activity activity, Report report, GithubTarget target,
                                 GithubLogin login) {
-            this.activity = activity;
+            super(activity);
             this.report = report;
             this.target = target;
             this.login = login;
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progress = new MaterialDialog.Builder(activity)
+        protected Dialog createDialog(@NonNull Context context) {
+            return new MaterialDialog.Builder(context)
                     .progress(true, 0)
                     .title(R.string.air_dialog_title_loading)
                     .show();
@@ -334,36 +330,37 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(@Result String result) {
             super.onPostExecute(result);
-            if (progress != null)
-                progress.dismiss();
+
+            Context context = getContext();
+            if (context == null) return;
 
             switch (result) {
                 case RESULT_OK:
-                    activity.finish();
+                    tryToFinishActivity();
                     break;
                 case RESULT_BAD_CREDENTIALS:
-                    new MaterialDialog.Builder(activity)
+                    new MaterialDialog.Builder(context)
                             .title(R.string.air_dialog_title_failed)
                             .content(R.string.air_dialog_description_failed_wrong_credentials)
                             .positiveText(R.string.air_dialog_action_failed)
                             .show();
                     break;
                 case RESULT_INVALID_TOKEN:
-                    new MaterialDialog.Builder(activity)
+                    new MaterialDialog.Builder(context)
                             .title(R.string.air_dialog_title_failed)
                             .content(R.string.air_dialog_description_failed_invalid_token)
                             .positiveText(R.string.air_dialog_action_failed)
                             .show();
                     break;
                 case RESULT_ISSUES_NOT_ENABLED:
-                    new MaterialDialog.Builder(activity)
+                    new MaterialDialog.Builder(context)
                             .title(R.string.air_dialog_title_failed)
                             .content(R.string.air_dialog_description_failed_issues_not_available)
                             .positiveText(R.string.air_dialog_action_failed)
                             .show();
                     break;
                 default:
-                    new MaterialDialog.Builder(activity)
+                    new MaterialDialog.Builder(context)
                             .title(R.string.air_dialog_title_failed)
                             .content(R.string.air_dialog_description_failed_unknown)
                             .positiveText(R.string.air_dialog_action_failed)
@@ -371,18 +368,97 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog,
                                                     @NonNull DialogAction which) {
-                                    activity.finish();
+                                    tryToFinishActivity();
                                 }
                             })
                             .cancelListener(new DialogInterface.OnCancelListener() {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
-                                    activity.finish();
+                                    tryToFinishActivity();
                                 }
                             })
                             .show();
                     break;
             }
         }
+
+        private void tryToFinishActivity() {
+            Context context = getContext();
+            if (context instanceof Activity) {
+                ((Activity) context).finish();
+            }
+        }
+    }
+
+    public static abstract class DialogAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+        private WeakReference<Context> contextWeakReference;
+        private WeakReference<Dialog> dialogWeakReference;
+
+        private boolean supposedToBeDismissed;
+
+        public DialogAsyncTask(Context context) {
+            contextWeakReference = new WeakReference<>(context);
+            dialogWeakReference = new WeakReference<>(null);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Context context = getContext();
+            if (!supposedToBeDismissed && context != null) {
+                Dialog dialog = createDialog(context);
+                dialogWeakReference = new WeakReference<>(dialog);
+                dialog.show();
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void onProgressUpdate(Progress... values) {
+            super.onProgressUpdate(values);
+            Dialog dialog = getDialog();
+            if (dialog != null) {
+                onProgressUpdate(dialog, values);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        protected void onProgressUpdate(@NonNull Dialog dialog, Progress... values) {
+        }
+
+        @Nullable
+        protected Context getContext() {
+            return contextWeakReference.get();
+        }
+
+        @Nullable
+        protected Dialog getDialog() {
+            return dialogWeakReference.get();
+        }
+
+        @Override
+        protected void onCancelled(Result result) {
+            super.onCancelled(result);
+            tryToDismiss();
+        }
+
+        @Override
+        protected void onPostExecute(Result result) {
+            super.onPostExecute(result);
+            tryToDismiss();
+        }
+
+        private void tryToDismiss() {
+            supposedToBeDismissed = true;
+            try {
+                Dialog dialog = getDialog();
+                if (dialog != null)
+                    dialog.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        protected abstract Dialog createDialog(@NonNull Context context);
     }
 }
