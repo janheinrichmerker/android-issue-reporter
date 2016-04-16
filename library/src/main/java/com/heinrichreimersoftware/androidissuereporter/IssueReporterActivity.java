@@ -384,13 +384,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         private void tryToFinishActivity() {
             Context context = getContext();
-            if (context instanceof Activity) {
+            if (context instanceof Activity && !((Activity) context).isFinishing()) {
                 ((Activity) context).finish();
             }
         }
     }
 
-    public static abstract class DialogAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
+    public static abstract class DialogAsyncTask<Pa, Pr, Re> extends AsyncTask<Pa, Pr, Re> {
         private WeakReference<Context> contextWeakReference;
         private WeakReference<Dialog> dialogWeakReference;
 
@@ -414,7 +414,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         @SuppressWarnings("unchecked")
         @Override
-        protected void onProgressUpdate(Progress... values) {
+        protected void onProgressUpdate(Pr... values) {
             super.onProgressUpdate(values);
             Dialog dialog = getDialog();
             if (dialog != null) {
@@ -423,7 +423,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
 
         @SuppressWarnings("unchecked")
-        protected void onProgressUpdate(@NonNull Dialog dialog, Progress... values) {
+        protected void onProgressUpdate(@NonNull Dialog dialog, Pr... values) {
         }
 
         @Nullable
@@ -437,13 +437,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onCancelled(Result result) {
+        protected void onCancelled(Re result) {
             super.onCancelled(result);
             tryToDismiss();
         }
 
         @Override
-        protected void onPostExecute(Result result) {
+        protected void onPostExecute(Re result) {
             super.onPostExecute(result);
             tryToDismiss();
         }
