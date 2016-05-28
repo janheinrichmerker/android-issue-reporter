@@ -5,6 +5,7 @@ android-issue-reporter
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3413)
 [![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/android-issue-reporter.svg)](https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter)
 [![Build Status](https://travis-ci.org/HeinrichReimer/android-issue-reporter.svg?branch=master)](https://travis-ci.org/HeinrichReimer/android-issue-reporter)
+[![Methods & Size](https://img.shields.io/badge/Methods & Size-Core: 155, Deps: 25357, 53 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.heinrichreimersoftware%3Aandroid-issue-reporter%3A1.2.3)
 [![Apache License 2.0](https://img.shields.io/github/license/HeinrichReimer/android-issue-reporter.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Based on [Paolo Rotolo](https://github.com/PaoloRotolo)'s [Gitty Reporter](https://github.com/PaoloRotolo/GittyReporter)
