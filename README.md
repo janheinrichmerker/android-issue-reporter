@@ -1,4 +1,4 @@
-[Icon](http://i.imgur.com/CoPArlm.png)
+![Icon](http://i.imgur.com/CoPArlm.png)
 
 android-issue-reporter
 ===============
