@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 1
 def versionMinor = 2
-def versionPatch = 3
+def versionPatch = 4
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 android {
@@ -29,6 +29,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile project(':library')
 }

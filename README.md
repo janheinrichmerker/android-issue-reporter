@@ -1,3 +1,4 @@
+[Icon](http://i.imgur.com/CoPArlm.png)
 
 android-issue-reporter
 ===============
@@ -40,7 +41,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.3'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.4'
 }
 ````
 
