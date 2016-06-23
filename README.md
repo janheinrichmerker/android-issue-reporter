@@ -3,7 +3,7 @@
 android-issue-reporter
 ===============
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3413)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-brightgreen.svg?style=flat&v=2)](http://android-arsenal.com/details/1/3413)
 [![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/android-issue-reporter.svg)](https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter)
 [![Build Status](https://travis-ci.org/HeinrichReimer/android-issue-reporter.svg?branch=master)](https://travis-ci.org/HeinrichReimer/android-issue-reporter)
 [![Apache License 2.0](https://img.shields.io/github/license/HeinrichReimer/android-issue-reporter.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -42,7 +42,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.4'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.5'
 }
 ````
 
