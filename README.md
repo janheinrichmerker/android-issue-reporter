@@ -54,21 +54,21 @@ Just create a new `Activity` that extends `IssueReporterActivity`:
 
 ```java
 public class ExampleReporterActivity extends IssueReporterActivity {
-    //Where should the issues go?
-    //(http://github.com/username/repository)
+    // Where should the issues go?
+    // (http://github.com/username/repository)
     @Override
     public GithubTarget getTarget() {
-        return new GithubTarget("HeinrichReimer", "android-issue-reporter");
+        return new GithubTarget("username", "repository");
     }
 
-    //[Optional] Auth token to open issues if users don't have a GitHub account
-    //You can register a bot account on GitHub and copy ist OAuth2 token here. 
+    // [Optional] Auth token to open issues if users don't have a GitHub account
+    // You can register a bot account on GitHub and copy ist OAuth2 token here. 
     @Override
     public String getGuestToken() {
         return "28f479f73db97d912611b27579aad7a76ad2baf5";
     }
 
-    //[Optional] Include other relevant info in the bug report (like custom variables)
+    // [Optional] Include other relevant info in the bug report (like custom variables)
     @Override
     public void onSaveExtraInfo(ExtraInfo extraInfo) {
         extraInfo.put("Test 1", "Example string");
@@ -76,5 +76,20 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     }
 }
 ```
+
+You can theme the reporter activity from your `styles.xml`:
+
+```xml
+<style ...>
+    <item name="colorPrimary">...</item><!-- required -->
+    <item name="colorPrimaryDark">...</item><!-- required -->
+    <item name="colorAccent">...</item><!-- required -->
+    <item name="cardBackgroundColor">...</item><!-- required -->
+    <item name="colorButtonNormal">#FF3D00</item><!-- optional -->
+    <item name="actionBarTheme">...</item><!-- optional -->
+</style>
+```
+
+Don't forget to link your theme to the reporter activity in your `AndroidManifest.xml`.
 
 [J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter
