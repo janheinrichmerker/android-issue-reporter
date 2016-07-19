@@ -279,11 +279,9 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         DeviceInfo deviceInfo = new DeviceInfo(this);
 
         ExtraInfo extraInfo = new ExtraInfo();
-        if (email != null && !email.isEmpty())
-            extraInfo.put("Email: ", email);
         onSaveExtraInfo(extraInfo);
 
-        Report report = new Report(bugTitle, bugDescription, deviceInfo, extraInfo);
+        Report report = new Report(bugTitle, bugDescription, deviceInfo, extraInfo, email);
         GithubTarget target = getTarget();
 
         ReportIssueTask.report(this, report, target, login);
