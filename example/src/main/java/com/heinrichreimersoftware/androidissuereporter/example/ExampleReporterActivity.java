@@ -1,10 +1,19 @@
 package com.heinrichreimersoftware.androidissuereporter.example;
 
+import android.os.Bundle;
+
 import com.heinrichreimersoftware.androidissuereporter.IssueReporterActivity;
 import com.heinrichreimersoftware.androidissuereporter.model.github.ExtraInfo;
 import com.heinrichreimersoftware.androidissuereporter.model.github.GithubTarget;
 
 public class ExampleReporterActivity extends IssueReporterActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setGuestEmailRequired(true);
+    }
+
     @Override
     public GithubTarget getTarget() {
         return new GithubTarget("HeinrichReimer", "android-issue-reporter");

@@ -20,6 +20,7 @@
     <string name="air_error_no_description">Bitte gib eine Problembeschreibung ein</string>
     <string name="air_error_no_username">Bitte gib Deinen gültigen GitHub-Benutzernamen ein</string>
     <string name="air_error_no_password">Bitte gib Dein gültiges GitHub-Passwort ein</string>
+    <string name="air_error_no_email">Bitte gib eine gültige E-mail Adresse ein</string>
 
     <string name="air_dialog_title_loading">Bericht auf GitHub hochladen…</string>
     <string name="air_dialog_title_failed">Senden des Berichts nicht möglich</string>

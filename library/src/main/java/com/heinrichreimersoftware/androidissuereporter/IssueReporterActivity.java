@@ -293,11 +293,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         this.emailRequired = required;
         if (required) {
             optionAnonymous.setText(R.string.air_label_use_email);
-            inputEmail.setHint(R.string.air_label_email);
+            ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email));
         }
         else {
             optionAnonymous.setText(R.string.air_label_use_guest);
-            inputEmail.setHint(R.string.air_label_email);
+            ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
         }
     }
 
