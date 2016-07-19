@@ -92,6 +92,7 @@
                 android:paddingEnd="0dp"
                 android:text="@string/air_label_use_guest"
                 android:layout_marginTop="@dimen/air_baseline"/>
+
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
                 android:id="@+id/air_layoutGuest"
                 android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -146,24 +147,6 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             }
         });
 
-        optionUseAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutLogin.expand();
-                layoutAnonymous.collapse();
-                inputUsername.setEnabled(true);
-                inputPassword.setEnabled(true);
-            }
-        });
-        optionAnonymous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutLogin.collapse();
-                layoutAnonymous.expand();
-                inputUsername.setEnabled(false);
-                inputPassword.setEnabled(false);
-            }
-        });
 
         inputPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -177,8 +160,29 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         });
 
         if (TextUtils.isEmpty(token)) {
-            optionUseAccount.setChecked(true);
-            optionAnonymous.setEnabled(false);
+            optionUseAccount.setButtonDrawable(new StateListDrawable());
+            optionUseAccount.setPadding(0, 0, 0, 0);
+            optionAnonymous.setVisibility(View.GONE);
+        }
+        else {
+            optionUseAccount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    layoutLogin.expand();
+                    layoutAnonymous.collapse();
+                    inputUsername.setEnabled(true);
+                    inputPassword.setEnabled(true);
+                }
+            });
+            optionAnonymous.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    layoutLogin.collapse();
+                    layoutAnonymous.expand();
+                    inputUsername.setEnabled(false);
+                    inputPassword.setEnabled(false);
+                }
+            });
         }
 
         buttonSend.setImageResource(ColorUtils.isDark(ThemeUtils.getColorAccent(this)) ?
