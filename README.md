@@ -77,19 +77,16 @@ public class ExampleReporterActivity extends IssueReporterActivity {
 }
 ```
 
-You can theme the reporter activity from your `styles.xml`:
+Your activity must have an `Theme.IssueReporter` theme declared in `AndroidManifest.xml`:
 
 ```xml
-<style ...>
+<style name="Theme.App.Light" parent="Theme.IssueReporter">
     <item name="colorPrimary">...</item><!-- required -->
     <item name="colorPrimaryDark">...</item><!-- required -->
     <item name="colorAccent">...</item><!-- required -->
-    <item name="cardBackgroundColor">...</item><!-- required -->
-    <item name="colorButtonNormal">#FF3D00</item><!-- optional -->
-    <item name="actionBarTheme">...</item><!-- optional -->
 </style>
 ```
 
-Don't forget to link your theme to the reporter activity in your `AndroidManifest.xml`.
+You can use `Theme.IssueReporter.Light` or `Theme.IssueReporter.Light.DarkActionBar` as replacement if you want a light theme.
 
 [J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter

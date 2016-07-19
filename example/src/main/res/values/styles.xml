@@ -1,20 +1,14 @@
 <resources>
 
-    <style name="Theme.App.Dark" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.App.Dark" parent="Theme.IssueReporter">
         <item name="colorPrimary">#9B26AF</item>
         <item name="colorPrimaryDark">#7A1EA1</item>
         <item name="colorAccent">#68EFAD</item>
-        <item name="colorButtonNormal">#68EFAD</item>
-        <item name="cardBackgroundColor">#424242</item>
     </style>
 
-    <style name="Theme.App.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.App.Light" parent="Theme.IssueReporter.Light.DarkActionBar">
         <item name="colorPrimary">#00BCD4</item>
         <item name="colorPrimaryDark">#0097A7</item>
         <item name="colorAccent">#FF3D00</item>
-        <item name="colorButtonNormal">#FF3D00</item>
-        <item name="cardBackgroundColor">#FFFFFF</item>
-
-        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 </resources>
