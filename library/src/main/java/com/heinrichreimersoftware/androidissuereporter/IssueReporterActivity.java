@@ -63,6 +63,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private static final String RESULT_ISSUES_NOT_ENABLED = "RESULT_ISSUES_NOT_ENABLED";
     private static final String RESULT_UNKNOWN = "RESULT_UNKNOWN";
 
+    private boolean emailRequired;
+
     private Toolbar toolbar;
 
     private TextInputEditText inputTitle;
@@ -70,9 +72,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private TextView textDeviceInfo;
     private ImageButton buttonDeviceInfo;
     private ExpandableRelativeLayout layoutDeviceInfo;
+    private ExpandableRelativeLayout layoutAnonymous;
 
     private TextInputEditText inputUsername;
     private TextInputEditText inputPassword;
+    private TextInputEditText inputEmail;
     private RadioButton optionUseAccount;
     private RadioButton optionAnonymous;
     private ExpandableRelativeLayout layoutLogin;
@@ -111,9 +115,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         inputUsername = (TextInputEditText) findViewById(R.id.air_inputUsername);
         inputPassword = (TextInputEditText) findViewById(R.id.air_inputPassword);
+        inputEmail = (TextInputEditText) findViewById(R.id.air_inputEmail);
         optionUseAccount = (RadioButton) findViewById(R.id.air_optionUseAccount);
         optionAnonymous = (RadioButton) findViewById(R.id.air_optionAnonymous);
         layoutLogin = (ExpandableRelativeLayout) findViewById(R.id.air_layoutLogin);
+        layoutAnonymous = (ExpandableRelativeLayout) findViewById(R.id.air_layoutGuest);
 
         buttonSend = (FloatingActionButton) findViewById(R.id.air_buttonSend);
     }
@@ -142,6 +148,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutLogin.expand();
+                if (emailRequired)
+                    layoutAnonymous.collapse();
                 inputUsername.setEnabled(true);
                 inputPassword.setEnabled(true);
             }
@@ -150,6 +158,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutLogin.collapse();
+                if (emailRequired)
+                    layoutAnonymous.expand();
                 inputUsername.setEnabled(false);
                 inputPassword.setEnabled(false);
             }
@@ -188,12 +198,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         if (optionUseAccount.isChecked()) {
             String username = inputUsername.getText().toString();
             String password = inputPassword.getText().toString();
-            sendBugReport(new GithubLogin(username, password));
+            sendBugReport(new GithubLogin(username, password), null);
         } else {
             if (TextUtils.isEmpty(token))
                 throw new IllegalStateException("You must provide a GitHub API Token.");
 
-            sendBugReport(new GithubLogin(token));
+            String email = inputEmail.getText().toString();
+            sendBugReport(new GithubLogin(token), email);
         }
     }
 
@@ -214,6 +225,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             } else {
                 removeError(inputPassword);
             }
+        } else {
+            if (emailRequired)
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
+                    setError(inputEmail, R.string.air_error_no_email);
+                    hasErrors = true;
+                } else
+                    removeError(inputEmail);
         }
 
         if (TextUtils.isEmpty(inputTitle.getText())) {
@@ -243,7 +261,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         layout.setError(null);
     }
 
-    private void sendBugReport(GithubLogin login) {
+    private void sendBugReport(GithubLogin login, String email) {
         if (!validateInput()) return;
 
         String bugTitle = inputTitle.getText().toString();
@@ -252,12 +270,18 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         DeviceInfo deviceInfo = new DeviceInfo(this);
 
         ExtraInfo extraInfo = new ExtraInfo();
+        if (email != null && !email.isEmpty())
+            extraInfo.put("Email: ", email);
         onSaveExtraInfo(extraInfo);
 
         Report report = new Report(bugTitle, bugDescription, deviceInfo, extraInfo);
         GithubTarget target = getTarget();
 
         ReportIssueTask.report(this, report, target, login);
+    }
+
+    protected void setGuestEmailRequired(boolean required) {
+        this.emailRequired = required;
     }
 
     protected void onSaveExtraInfo(ExtraInfo extraInfo) {
@@ -461,4 +485,5 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         protected abstract Dialog createDialog(@NonNull Context context);
     }
+
 }
