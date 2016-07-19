@@ -330,6 +330,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         protected Dialog createDialog(@NonNull Context context) {
             return new MaterialDialog.Builder(context)
                     .progress(true, 0)
+                    .progressIndeterminateStyle(true)
                     .title(R.string.air_dialog_title_loading)
                     .show();
         }
