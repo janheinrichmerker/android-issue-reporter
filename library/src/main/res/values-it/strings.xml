@@ -9,9 +9,12 @@
     <string name="air_label_device_info">Informazioni dispositivo</string>
 
     <string name="air_label_use_account">Invia usando il tuo account GitHub</string>
+    <string name="air_label_use_email">Invia usando il e-mail</string>
     <string name="air_label_use_guest">Invia in forma anonima</string>
     <string name="air_label_username">Nome utente</string>
     <string name="air_label_password">Password</string>
+    <string name="air_label_email">E-mail</string>
+    <string name="air_label_email_optional">E-mail (opzionale)</string>
 
     <string name="air_error_no_title">Per favore inserisci un titolo al problema</string>
     <string name="air_error_no_description">Per favore inserisci una descrizione al problema</string>

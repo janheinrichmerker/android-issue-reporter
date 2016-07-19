@@ -46,6 +46,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
+import static android.util.Patterns.EMAIL_ADDRESS;
+
 public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private static final int STATUS_BAD_CREDENTIALS = 401;
@@ -148,8 +150,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutLogin.expand();
-                if (emailRequired)
-                    layoutAnonymous.collapse();
+                layoutAnonymous.collapse();
                 inputUsername.setEnabled(true);
                 inputPassword.setEnabled(true);
             }
@@ -158,8 +159,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutLogin.collapse();
-                if (emailRequired)
-                    layoutAnonymous.expand();
+                layoutAnonymous.expand();
                 inputUsername.setEnabled(false);
                 inputPassword.setEnabled(false);
             }
@@ -203,7 +203,12 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(token))
                 throw new IllegalStateException("You must provide a GitHub API Token.");
 
-            String email = inputEmail.getText().toString();
+            String email = null;
+            if (!TextUtils.isEmpty(inputEmail.getText()) &&
+                    EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
+                email = inputEmail.getText().toString();
+            }
+
             sendBugReport(new GithubLogin(token), email);
         }
     }
@@ -226,12 +231,16 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                 removeError(inputPassword);
             }
         } else {
-            if (emailRequired)
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
+            if (emailRequired) {
+                if (TextUtils.isEmpty(inputEmail.getText()) ||
+                        !EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
                     setError(inputEmail, R.string.air_error_no_email);
                     hasErrors = true;
-                } else
+                }
+                else {
                     removeError(inputEmail);
+                }
+            }
         }
 
         if (TextUtils.isEmpty(inputTitle.getText())) {
@@ -282,6 +291,14 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     protected void setGuestEmailRequired(boolean required) {
         this.emailRequired = required;
+        if (required) {
+            optionAnonymous.setText(R.string.air_label_use_email);
+            inputEmail.setHint(R.string.air_label_email);
+        }
+        else {
+            optionAnonymous.setText(R.string.air_label_use_guest);
+            inputEmail.setHint(R.string.air_label_email);
+        }
     }
 
     protected void onSaveExtraInfo(ExtraInfo extraInfo) {

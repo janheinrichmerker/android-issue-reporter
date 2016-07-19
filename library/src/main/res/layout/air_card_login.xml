@@ -116,7 +116,7 @@
                             android:inputType="textEmailAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/air_label_email"/>
+                            android:hint="@string/air_label_email_optional"/>
 
                     </android.support.design.widget.TextInputLayout>
 
