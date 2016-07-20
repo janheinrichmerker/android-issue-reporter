@@ -317,8 +317,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
     }
 
-    protected void setMessageCharacterMinimum(int body) {
-        this.bodyMinChar = body;
+    protected void setMinimumDescriptionLength(int minimumDescriptionLength) {
+        this.bodyMinChar = minimumDescriptionLength;
     }
 
     protected void onSaveExtraInfo(ExtraInfo extraInfo) {
