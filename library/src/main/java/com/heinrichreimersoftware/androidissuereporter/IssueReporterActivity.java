@@ -165,8 +165,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             optionUseAccount.setButtonDrawable(new StateListDrawable());
             optionUseAccount.setPadding(0, 0, 0, 0);
             optionAnonymous.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             optionUseAccount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -242,8 +241,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                         !EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
                     setError(inputEmail, R.string.air_error_no_email);
                     hasErrors = true;
-                }
-                else {
+                } else {
                     removeError(inputEmail);
                 }
             }
@@ -262,14 +260,15 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         } else {
             if (bodyMinChar > 0) {
                 if (inputDescription.getText().toString().length() < bodyMinChar) {
-                    setError(inputDescription, getString(R.string.air_error_short_description) + " " + bodyMinChar + " " + getString(R.string.characters));
+                    setError(inputDescription, getString(R.string.air_error_short_description) + " " + bodyMinChar + " " + getResources().getQuantityString(R.plurals.characters, bodyMinChar));
                     hasErrors = true;
                 } else {
                     removeError(inputDescription);
                 }
+            } else {
+                throw new IllegalArgumentException("Message minimum length must be at least 1 character");
             }
         }
-
         return !hasErrors;
     }
 
@@ -310,8 +309,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         if (required) {
             optionAnonymous.setText(R.string.air_label_use_email);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email));
-        }
-        else {
+        } else {
             optionAnonymous.setText(R.string.air_label_use_guest);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
         }
