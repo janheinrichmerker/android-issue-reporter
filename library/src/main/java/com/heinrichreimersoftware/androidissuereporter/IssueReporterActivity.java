@@ -68,6 +68,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private boolean emailRequired;
 
+    private int bodyMinChar;
+
     private Toolbar toolbar;
 
     private TextInputEditText inputTitle;
@@ -258,7 +260,14 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             setError(inputDescription, R.string.air_error_no_description);
             hasErrors = true;
         } else {
-            removeError(inputDescription);
+            if (bodyMinChar > 0) {
+                if (inputDescription.getText().toString().length() < bodyMinChar) {
+                    setError(inputDescription, getString(R.string.air_error_short_description) + " " + bodyMinChar + " " + getString(R.string.characters));
+                    hasErrors = true;
+                } else {
+                    removeError(inputDescription);
+                }
+            }
         }
 
         return !hasErrors;
@@ -267,6 +276,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private void setError(TextInputEditText editText, @StringRes int errorRes) {
         TextInputLayout layout = (TextInputLayout) editText.getParent();
         layout.setError(getString(errorRes));
+    }
+
+    private void setError(TextInputEditText editText, String error) {
+        TextInputLayout layout = (TextInputLayout) editText.getParent();
+        layout.setError(error);
     }
 
     private void removeError(TextInputEditText editText) {
@@ -301,6 +315,10 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             optionAnonymous.setText(R.string.air_label_use_guest);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
         }
+    }
+
+    protected void setMessageCharacterMinimum(int body) {
+        this.bodyMinChar = body;
     }
 
     protected void onSaveExtraInfo(ExtraInfo extraInfo) {

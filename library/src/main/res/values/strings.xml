@@ -29,4 +29,6 @@
     <string name="air_dialog_description_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
     <string name="air_dialog_description_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
     <string name="air_dialog_action_failed">OK</string>
+    <string name="characters">characters</string>
+    <string name="air_error_short_description">The message needs to be at least</string>
 </resources>

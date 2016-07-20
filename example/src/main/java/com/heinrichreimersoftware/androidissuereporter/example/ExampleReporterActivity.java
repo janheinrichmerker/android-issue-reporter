@@ -12,6 +12,7 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setGuestEmailRequired(true);
+        setMessageCharacterMinimum(12);
     }
 
     @Override
