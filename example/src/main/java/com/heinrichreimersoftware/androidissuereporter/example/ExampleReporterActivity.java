@@ -11,7 +11,7 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setGuestEmailRequired(true);
+        setMinimumDescriptionLength(12);
     }
 
     @Override

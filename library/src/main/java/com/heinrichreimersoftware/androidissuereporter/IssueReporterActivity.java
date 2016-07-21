@@ -68,6 +68,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private boolean emailRequired;
 
+    private int bodyMinChar;
+
     private Toolbar toolbar;
 
     private TextInputEditText inputTitle;
@@ -163,8 +165,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             optionUseAccount.setButtonDrawable(new StateListDrawable());
             optionUseAccount.setPadding(0, 0, 0, 0);
             optionAnonymous.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             optionUseAccount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -240,8 +241,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                         !EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
                     setError(inputEmail, R.string.air_error_no_email);
                     hasErrors = true;
-                }
-                else {
+                } else {
                     removeError(inputEmail);
                 }
             }
@@ -258,15 +258,27 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             setError(inputDescription, R.string.air_error_no_description);
             hasErrors = true;
         } else {
-            removeError(inputDescription);
+            if (bodyMinChar > 0) {
+                if (inputDescription.getText().toString().length() < bodyMinChar) {
+                    setError(inputDescription, getResources().getQuantityString(R.plurals.air_error_short_description, bodyMinChar, bodyMinChar));
+                    hasErrors = true;
+                } else {
+                    removeError(inputDescription);
+                }
+            } else
+                removeError(inputDescription);
         }
-
         return !hasErrors;
     }
 
     private void setError(TextInputEditText editText, @StringRes int errorRes) {
         TextInputLayout layout = (TextInputLayout) editText.getParent();
         layout.setError(getString(errorRes));
+    }
+
+    private void setError(TextInputEditText editText, String error) {
+        TextInputLayout layout = (TextInputLayout) editText.getParent();
+        layout.setError(error);
     }
 
     private void removeError(TextInputEditText editText) {
@@ -296,11 +308,14 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         if (required) {
             optionAnonymous.setText(R.string.air_label_use_email);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email));
-        }
-        else {
+        } else {
             optionAnonymous.setText(R.string.air_label_use_guest);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
         }
+    }
+
+    protected void setMinimumDescriptionLength(int length) {
+        this.bodyMinChar = length;
     }
 
     protected void onSaveExtraInfo(ExtraInfo extraInfo) {
