@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <plurals name="characters">
-        <item quantity="one">character</item>
-        <item quantity="other">characters</item>
-    </plurals>
-</resources>

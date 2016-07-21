@@ -260,14 +260,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         } else {
             if (bodyMinChar > 0) {
                 if (inputDescription.getText().toString().length() < bodyMinChar) {
-                    setError(inputDescription, getString(R.string.air_error_short_description) + " " + bodyMinChar + " " + getResources().getQuantityString(R.plurals.characters, bodyMinChar));
+                    setError(inputDescription, getResources().getQuantityString(R.plurals.air_error_short_description, bodyMinChar, bodyMinChar));
                     hasErrors = true;
                 } else {
                     removeError(inputDescription);
                 }
-            } else {
-                throw new IllegalArgumentException("Message minimum length must be at least 1 character");
-            }
+            } else
+                removeError(inputDescription);
         }
         return !hasErrors;
     }
