@@ -89,4 +89,25 @@ Your activity must have an `Theme.IssueReporter` theme declared in `AndroidManif
 
 You can use `Theme.IssueReporter.Light` or `Theme.IssueReporter.Light.DarkActionBar` as replacement if you want a light theme.
 
+How to create a bot key
+---
+
+1.  Create a new GitHub account.  
+    _(You have to use a unique email address.)_
+
+2.  Go to https://github.com/settings/tokens and create a new token using <kbd>Generate new token</kbd>.  
+    _(You don't need to give the bot any other rights than posting issues.)_
+
+3.  Copy the OAuth access token you get at the end of the setup.
+
+4.  Override `getGuestToken()` in your reporter activity like this:
+    
+    ```java
+    @Override
+    public String getGuestToken() {
+        return "<your token here>";
+    }
+    ```
+
+
 [J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter
