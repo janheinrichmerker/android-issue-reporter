@@ -96,7 +96,7 @@ How to create a bot key
     _(You have to use a unique email address.)_
 
 2.  Go to https://github.com/settings/tokens and create a new token using <kbd>Generate new token</kbd>.  
-    _(You don't need to give the bot any other rights than posting issues.)_
+    _(You only need to give the bot the `public_repo` permission.)_
 
 3.  Copy the OAuth access token you get at the end of the setup.
 
