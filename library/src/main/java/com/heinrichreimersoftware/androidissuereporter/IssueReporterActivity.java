@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -53,41 +54,32 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private static final int STATUS_BAD_CREDENTIALS = 401;
     private static final int STATUS_ISSUES_NOT_ENABLED = 410;
-
     @StringDef({RESULT_OK, RESULT_BAD_CREDENTIALS, RESULT_INVALID_TOKEN, RESULT_ISSUES_NOT_ENABLED,
             RESULT_UNKNOWN})
     @Retention(RetentionPolicy.SOURCE)
     private @interface Result {
     }
-
     private static final String RESULT_OK = "RESULT_OK";
     private static final String RESULT_BAD_CREDENTIALS = "RESULT_BAD_CREDENTIALS";
     private static final String RESULT_INVALID_TOKEN = "RESULT_INVALID_TOKEN";
     private static final String RESULT_ISSUES_NOT_ENABLED = "RESULT_ISSUES_NOT_ENABLED";
     private static final String RESULT_UNKNOWN = "RESULT_UNKNOWN";
-
     private boolean emailRequired;
-
     private int bodyMinChar;
-
     private Toolbar toolbar;
-
     private TextInputEditText inputTitle;
     private TextInputEditText inputDescription;
     private TextView textDeviceInfo;
     private ImageButton buttonDeviceInfo;
     private ExpandableRelativeLayout layoutDeviceInfo;
     private ExpandableRelativeLayout layoutAnonymous;
-
     private TextInputEditText inputUsername;
     private TextInputEditText inputPassword;
     private TextInputEditText inputEmail;
     private RadioButton optionUseAccount;
     private RadioButton optionAnonymous;
     private ExpandableRelativeLayout layoutLogin;
-
     private FloatingActionButton buttonSend;
-
     private String token;
 
     @Override
@@ -272,18 +264,39 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     }
 
     private void setError(TextInputEditText editText, @StringRes int errorRes) {
-        TextInputLayout layout = (TextInputLayout) editText.getParent();
-        layout.setError(getString(errorRes));
+        try {
+            View layout = (View) editText.getParent();
+            while (!layout.getClass().getSimpleName().equals(TextInputLayout.class.getSimpleName()))
+                layout = (View) layout.getParent();
+            TextInputLayout realLayout = (TextInputLayout) layout;
+            realLayout.setError(getString(errorRes));
+        } catch (ClassCastException | NullPointerException e) {
+            Log.e(e.getMessage(), "In setError(TextInputEditText, int)");
+        }
     }
 
     private void setError(TextInputEditText editText, String error) {
-        TextInputLayout layout = (TextInputLayout) editText.getParent();
-        layout.setError(error);
+        try {
+            View layout = (View) editText.getParent();
+            while (!layout.getClass().getSimpleName().equals(TextInputLayout.class.getSimpleName()))
+                layout = (View) layout.getParent();
+            TextInputLayout realLayout = (TextInputLayout) layout;
+            realLayout.setError(error);
+        } catch (ClassCastException | NullPointerException e) {
+            Log.e(e.getMessage(), "In setError(TextInputEditText, String)");
+        }
     }
 
     private void removeError(TextInputEditText editText) {
-        TextInputLayout layout = (TextInputLayout) editText.getParent();
-        layout.setError(null);
+        try {
+            View layout = (View) editText.getParent();
+            while (!layout.getClass().getSimpleName().equals(TextInputLayout.class.getSimpleName()))
+                layout = (View) layout.getParent();
+            TextInputLayout realLayout = (TextInputLayout) layout;
+            realLayout.setError(null);
+        } catch (ClassCastException | NullPointerException e) {
+            Log.e(e.getMessage(), "In removeError(TextInputEditText)");
+        }
     }
 
     private void sendBugReport(GithubLogin login, String email) {
@@ -307,7 +320,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         this.emailRequired = required;
         if (required) {
             optionAnonymous.setText(R.string.air_label_use_email);
-            ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email));
+            ((TextInputLayout) findViewById(R.id.air_inputEmailParent)).setHint(getString(R.string.air_label_email));
         } else {
             optionAnonymous.setText(R.string.air_label_use_guest);
             ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
@@ -332,17 +345,17 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         private final GithubTarget target;
         private final GithubLogin login;
 
-        public static void report(Activity activity, Report report, GithubTarget target,
-                                  GithubLogin login) {
-            new ReportIssueTask(activity, report, target, login).execute();
-        }
-
         private ReportIssueTask(Activity activity, Report report, GithubTarget target,
                                 GithubLogin login) {
             super(activity);
             this.report = report;
             this.target = target;
             this.login = login;
+        }
+
+        public static void report(Activity activity, Report report, GithubTarget target,
+                                  GithubLogin login) {
+            new ReportIssueTask(activity, report, target, login).execute();
         }
 
         @Override
