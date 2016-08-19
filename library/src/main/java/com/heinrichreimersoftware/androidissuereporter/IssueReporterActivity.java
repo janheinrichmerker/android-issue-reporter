@@ -54,6 +54,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     private static final int STATUS_BAD_CREDENTIALS = 401;
     private static final int STATUS_ISSUES_NOT_ENABLED = 410;
+    @StringDef({RESULT_OK, RESULT_BAD_CREDENTIALS, RESULT_INVALID_TOKEN, RESULT_ISSUES_NOT_ENABLED,
+            RESULT_UNKNOWN})
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface Result {
+    }
     private static final String RESULT_OK = "RESULT_OK";
     private static final String RESULT_BAD_CREDENTIALS = "RESULT_BAD_CREDENTIALS";
     private static final String RESULT_INVALID_TOKEN = "RESULT_INVALID_TOKEN";
@@ -333,12 +338,6 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     protected String getGuestToken() {
         return null;
-    }
-
-    @StringDef({RESULT_OK, RESULT_BAD_CREDENTIALS, RESULT_INVALID_TOKEN, RESULT_ISSUES_NOT_ENABLED,
-            RESULT_UNKNOWN})
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface Result {
     }
 
     private static class ReportIssueTask extends DialogAsyncTask<Void, Void, String> {
