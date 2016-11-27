@@ -9,4 +9,6 @@
     <dimen name="air_card_margin_top">@dimen/air_baseline_half</dimen>
 
     <dimen name="air_radio_button_padding_start">@dimen/air_baseline</dimen>
+
+    <dimen name="fab_size_normal">56dp</dimen>
 </resources>

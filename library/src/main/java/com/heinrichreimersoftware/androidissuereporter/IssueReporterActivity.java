@@ -353,7 +353,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             this.login = login;
         }
 
-        public static void report(Activity activity, Report report, GithubTarget target,
+        private static void report(Activity activity, Report report, GithubTarget target,
                                   GithubLogin login) {
             new ReportIssueTask(activity, report, target, login).execute();
         }
