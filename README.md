@@ -108,6 +108,9 @@ How to create a bot key
         return "<your token here>";
     }
     ```
-
+    
+Limitations
+---
+- You can't use two factor authentication.
 
 [J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter
