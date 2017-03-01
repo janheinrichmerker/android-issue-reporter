@@ -4,11 +4,15 @@
     <style name="Theme.IssueReporter" parent="Theme.AppCompat.NoActionBar">
         <item name="cardBackgroundColor">#424242</item>
         <item name="colorButtonNormal">?colorAccent</item>
+        <item name="md_dark_theme">true</item>
+        <item name="md_background_color">#424242</item>
     </style>
 
     <style name="Theme.IssueReporter.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="cardBackgroundColor">#FFFFFF</item>
         <item name="colorButtonNormal">?colorAccent</item>
+        <item name="md_dark_theme">false</item>
+        <item name="md_background_color">#FFFFFF</item>
     </style>
 
     <style name="Theme.IssueReporter.Light.DarkActionBar">

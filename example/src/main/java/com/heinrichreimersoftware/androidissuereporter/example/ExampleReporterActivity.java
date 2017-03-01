@@ -11,17 +11,13 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setMinimumDescriptionLength(12);
+        setMinimumDescriptionLength(10);
+        setGuestToken("28f479f73db97d912611b27579aad7a76ad2baf5");
     }
 
     @Override
     public GithubTarget getTarget() {
         return new GithubTarget("HeinrichReimer", "android-issue-reporter");
-    }
-
-    @Override
-    public String getGuestToken() {
-        return "28f479f73db97d912611b27579aad7a76ad2baf5";
     }
 
     @Override

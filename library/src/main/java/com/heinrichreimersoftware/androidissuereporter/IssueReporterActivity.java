@@ -51,6 +51,7 @@ import java.lang.ref.WeakReference;
 import static android.util.Patterns.EMAIL_ADDRESS;
 
 public abstract class IssueReporterActivity extends AppCompatActivity {
+    private static final String TAG = IssueReporterActivity.class.getSimpleName();
 
     private static final int STATUS_BAD_CREDENTIALS = 401;
     private static final int STATUS_ISSUES_NOT_ENABLED = 410;
@@ -64,8 +65,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private static final String RESULT_INVALID_TOKEN = "RESULT_INVALID_TOKEN";
     private static final String RESULT_ISSUES_NOT_ENABLED = "RESULT_ISSUES_NOT_ENABLED";
     private static final String RESULT_UNKNOWN = "RESULT_UNKNOWN";
-    private boolean emailRequired;
-    private int bodyMinChar;
+    private boolean emailRequired = false;
+    private int bodyMinChar = 0;
     private Toolbar toolbar;
     private TextInputEditText inputTitle;
     private TextInputEditText inputDescription;
@@ -92,6 +93,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         setContentView(R.layout.air_activity_issue_reporter);
         findViews();
 
+        //noinspection deprecation
         token = getGuestToken();
 
         initViews();
@@ -128,10 +130,10 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
+                toolbar.setContentInsetsRelative(
+                        getResources().getDimensionPixelSize(R.dimen.air_baseline_content),
+                        getResources().getDimensionPixelSize(R.dimen.air_baseline));
             }
-            toolbar.setContentInsetsRelative(
-                    getResources().getDimensionPixelSize(R.dimen.air_baseline_content),
-                    getResources().getDimensionPixelSize(R.dimen.air_baseline));
         }
 
         buttonDeviceInfo.setOnClickListener(new View.OnClickListener() {
@@ -271,7 +273,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             TextInputLayout realLayout = (TextInputLayout) layout;
             realLayout.setError(getString(errorRes));
         } catch (ClassCastException | NullPointerException e) {
-            Log.e(e.getMessage(), "In setError(TextInputEditText, int)");
+            Log.e(TAG, "Issue while setting error UI.", e);
         }
     }
 
@@ -283,7 +285,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             TextInputLayout realLayout = (TextInputLayout) layout;
             realLayout.setError(error);
         } catch (ClassCastException | NullPointerException e) {
-            Log.e(e.getMessage(), "In setError(TextInputEditText, String)");
+            Log.e(TAG, "Issue while setting error UI.", e);
         }
     }
 
@@ -295,7 +297,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             TextInputLayout realLayout = (TextInputLayout) layout;
             realLayout.setError(null);
         } catch (ClassCastException | NullPointerException e) {
-            Log.e(e.getMessage(), "In removeError(TextInputEditText)");
+            Log.e(TAG, "Issue while removing error UI.", e);
         }
     }
 
@@ -316,18 +318,18 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         ReportIssueTask.report(this, report, target, login);
     }
 
-    protected void setGuestEmailRequired(boolean required) {
+    protected final void setGuestEmailRequired(boolean required) {
         this.emailRequired = required;
         if (required) {
             optionAnonymous.setText(R.string.air_label_use_email);
             ((TextInputLayout) findViewById(R.id.air_inputEmailParent)).setHint(getString(R.string.air_label_email));
         } else {
             optionAnonymous.setText(R.string.air_label_use_guest);
-            ((TextInputLayout) inputEmail.getParent()).setHint(getString(R.string.air_label_email_optional));
+            ((TextInputLayout) findViewById(R.id.air_inputEmailParent)).setHint(getString(R.string.air_label_email_optional));
         }
     }
 
-    protected void setMinimumDescriptionLength(int length) {
+    protected final void setMinimumDescriptionLength(int length) {
         this.bodyMinChar = length;
     }
 
@@ -336,8 +338,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     protected abstract GithubTarget getTarget();
 
+    @Deprecated
     protected String getGuestToken() {
         return null;
+    }
+
+    protected final void setGuestToken(String token) {
+        this.token = token;
     }
 
     private static class ReportIssueTask extends DialogAsyncTask<Void, Void, String> {
@@ -462,13 +469,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
     }
 
-    public static abstract class DialogAsyncTask<Pa, Pr, Re> extends AsyncTask<Pa, Pr, Re> {
+    private static abstract class DialogAsyncTask<Pa, Pr, Re> extends AsyncTask<Pa, Pr, Re> {
         private WeakReference<Context> contextWeakReference;
         private WeakReference<Dialog> dialogWeakReference;
 
         private boolean supposedToBeDismissed;
 
-        public DialogAsyncTask(Context context) {
+        private DialogAsyncTask(Context context) {
             contextWeakReference = new WeakReference<>(context);
             dialogWeakReference = new WeakReference<>(null);
         }
@@ -486,7 +493,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         @SuppressWarnings("unchecked")
         @Override
-        protected void onProgressUpdate(Pr... values) {
+        protected final void onProgressUpdate(Pr... values) {
             super.onProgressUpdate(values);
             Dialog dialog = getDialog();
             if (dialog != null) {
@@ -495,7 +502,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
 
         @SuppressWarnings("unchecked")
-        protected void onProgressUpdate(@NonNull Dialog dialog, Pr... values) {
+        private void onProgressUpdate(@NonNull Dialog dialog, Pr... values) {
         }
 
         @Nullable

@@ -4,4 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <application>
+
+        <activity android:name=".IssueReporterLauncher$Activity"
+            android:theme="@style/Theme.IssueReporter"/>
+
+    </application>
+
 </manifest>

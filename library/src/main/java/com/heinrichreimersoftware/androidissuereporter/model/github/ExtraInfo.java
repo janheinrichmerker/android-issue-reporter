@@ -1,5 +1,7 @@
 package com.heinrichreimersoftware.androidissuereporter.model.github;
 
+import android.os.Bundle;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,8 +36,16 @@ public class ExtraInfo {
         extraInfo.put(key, String.valueOf(value));
     }
 
+    public void putAll(ExtraInfo extraInfo) {
+        this.extraInfo.putAll(extraInfo.extraInfo);
+    }
+
     public void remove(String key) {
         extraInfo.remove(key);
+    }
+
+    public boolean isEmpty() {
+        return extraInfo.isEmpty();
     }
 
     public String toMarkdown() {
@@ -55,5 +65,24 @@ public class ExtraInfo {
         output.append("</table>\n");
 
         return output.toString();
+    }
+
+    public Bundle toBundle() {
+        Bundle bundle = new Bundle(extraInfo.size());
+        for (String key : extraInfo.keySet()) {
+            bundle.putString(key, extraInfo.get(key));
+        }
+        return bundle;
+    }
+
+    public static ExtraInfo fromBundle(Bundle bundle) {
+        ExtraInfo extraInfo = new ExtraInfo();
+        if (bundle == null || bundle.isEmpty()) {
+            return extraInfo;
+        }
+        for (String key : bundle.keySet()) {
+            extraInfo.put(key, bundle.getString(key));
+        }
+        return extraInfo;
     }
 }

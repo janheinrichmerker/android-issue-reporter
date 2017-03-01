@@ -18,6 +18,10 @@
 
     <string name="air_error_no_title">Please enter an issue title</string>
     <string name="air_error_no_description">Please enter an issue description</string>
+    <plurals name="air_error_short_description">
+        <item quantity="one">The description must have at least %d character</item>
+        <item quantity="other">The description must have at least %d characters</item>
+    </plurals>
     <string name="air_error_no_username">Please enter your valid GitHub username</string>
     <string name="air_error_no_password">Please enter your valid GitHub password</string>
     <string name="air_error_no_email">Please enter a e-mail address</string>
@@ -29,8 +33,4 @@
     <string name="air_dialog_description_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
     <string name="air_dialog_description_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
     <string name="air_dialog_action_failed">OK</string>
-    <plurals name="air_error_short_description">
-        <item quantity="one">The description must have at least %d character.</item>
-        <item quantity="other">The description must have at least %d characters.</item>
-    </plurals>
 </resources>

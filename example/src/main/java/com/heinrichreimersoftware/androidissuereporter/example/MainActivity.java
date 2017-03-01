@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, ExampleReporterActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(MainActivity.this, ExampleReporterNoGuestTokenActivity.class);
-                        startActivity(intent);
+                        IssueReporterLauncher.forTarget("HeinrichReimer", "android-issue-reporter")
+                                .theme(R.style.Theme_App_Dark)
+                                .putExtraInfo("Test 1", "Example string")
+                                .putExtraInfo("Test 2", true)
+                                .launch(MainActivity.this);
                     }
 
                 }

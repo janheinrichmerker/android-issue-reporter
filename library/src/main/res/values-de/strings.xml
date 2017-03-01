@@ -18,6 +18,10 @@
 
     <string name="air_error_no_title">Bitte gib einen Problemtitel ein</string>
     <string name="air_error_no_description">Bitte gib eine Problembeschreibung ein</string>
+    <plurals name="air_error_short_description">
+        <item quantity="one">Die Beschreibung muss mindestens %d Zeichen haben</item>
+        <item quantity="other">Die Beschreibung muss mindestens %d Zeichen haben</item>
+    </plurals>
     <string name="air_error_no_username">Bitte gib Deinen gültigen GitHub-Benutzernamen ein</string>
     <string name="air_error_no_password">Bitte gib Dein gültiges GitHub-Passwort ein</string>
     <string name="air_error_no_email">Bitte gib eine gültige E-mail Adresse ein</string>

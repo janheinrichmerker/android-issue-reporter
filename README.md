@@ -42,13 +42,40 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:1.2.5'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.3.0'
 }
 ````
 
 Get the latest dependency at [jitpack.io][J].
 
-How to use
+How to use (with `IssueReporterLauncher`)
+-----------
+Just start the issue reporter directly from your activity using the launcher builder:
+
+```java
+IssueReporterLauncher.forTarget("HeinrichReimer", "android-issue-reporter")
+        // [Recommended] Theme to use for the reporter. 
+        // (See #theming for further information.)
+        .theme(R.style.Theme_App_Dark)
+        // [Optional] Auth token to open issues if users don't have a GitHub account
+        // You can register a bot account on GitHub and copy ist OAuth2 token here.
+        // (See #how-to-create-a-bot-key for further information.)
+        .guestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
+        // [Optional] Force users to enter an email adress when the report is sent using
+        // the guest token.
+        .guestEmailRequired(true)
+        // [Optional] Set a minimum character limit for the description to filter out
+        // empty reports.
+        .minDescriptionLength(20)
+        // [Optional] Include other relevant info in the bug report (like custom variables)
+        .putExtraInfo("Test 1", "Example string")
+        .putExtraInfo("Test 2", true)
+        // [Optional] Disable back arrow in toolbar
+        .homeAsUpEnabled(false)
+        .launch(this);
+```
+
+How to use (extending `IssueReporterActivity`)
 -----------
 Just create a new `Activity` that extends `IssueReporterActivity`:
 
@@ -60,12 +87,21 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     public GithubTarget getTarget() {
         return new GithubTarget("username", "repository");
     }
-
-    // [Optional] Auth token to open issues if users don't have a GitHub account
-    // You can register a bot account on GitHub and copy ist OAuth2 token here. 
+    
     @Override
-    public String getGuestToken() {
-        return "28f479f73db97d912611b27579aad7a76ad2baf5";
+    protected void onCreate(Bundle savedInstanceState) {
+        // [Optional] Auth token to open issues if users don't have a GitHub account
+        // You can register a bot account on GitHub and copy ist OAuth2 token here.
+        // (See #how-to-create-a-bot-key for further information.)
+        setGuestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
+        
+        // [Optional] Force users to enter an email adress when the report is sent using
+        // the guest token.
+        setGuestEmailRequired(true);
+        
+        // [Optional] Set a minimum character limit for the description to filter out
+        // empty reports.
+        setMinimumDescriptionLength(20);
     }
 
     // [Optional] Include other relevant info in the bug report (like custom variables)
@@ -77,7 +113,9 @@ public class ExampleReporterActivity extends IssueReporterActivity {
 }
 ```
 
-Your activity must have an `Theme.IssueReporter` theme declared in `AndroidManifest.xml`:
+Theming
+---
+Create a theme extending `Theme.IssueReporter` theme and set it to the launcher using `IssueReporterLauncher.theme(@StyleRes int theme)` or declare it in `AndroidManifest.xml` if you have extended `IssueReporterActivity`:
 
 ```xml
 <style name="Theme.App.Light" parent="Theme.IssueReporter">
