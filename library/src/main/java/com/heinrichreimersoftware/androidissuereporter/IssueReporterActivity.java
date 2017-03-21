@@ -1,11 +1,36 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2017 Jan Heinrich Reimer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.heinrichreimersoftware.androidissuereporter;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +49,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -81,6 +107,9 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private RadioButton optionAnonymous;
     private ExpandableRelativeLayout layoutLogin;
     private FloatingActionButton buttonSend;
+
+    private Drawable optionUseAccountButtonDrawable = null;
+
     private String token;
 
     @Override
@@ -155,11 +184,38 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             }
         });
 
+        updateGuestTokenViews();
+
+        buttonSend.setImageResource(ColorUtils.isDark(ThemeUtils.getColorAccent(this)) ?
+                R.drawable.air_ic_send_dark : R.drawable.air_ic_send_light);
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reportIssue();
+            }
+        });
+    }
+
+    private void setOptionUseAccountMarginStart(int marginStart) {
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) optionUseAccount.getLayoutParams();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            layoutParams.setMarginStart(marginStart);
+        } else {
+            layoutParams.leftMargin = marginStart;
+        }
+        optionUseAccount.setLayoutParams(layoutParams);
+    }
+
+    private void updateGuestTokenViews() {
         if (TextUtils.isEmpty(token)) {
-            optionUseAccount.setButtonDrawable(new StateListDrawable());
-            optionUseAccount.setPadding(0, 0, 0, 0);
+            int baseline = getResources().getDimensionPixelSize(R.dimen.air_baseline);
+            int radioButtonPaddingStart = getResources().getDimensionPixelSize(R.dimen.air_radio_button_padding_start);
+            setOptionUseAccountMarginStart(-2 * baseline - radioButtonPaddingStart);
+            optionUseAccount.setEnabled(false);
             optionAnonymous.setVisibility(View.GONE);
         } else {
+            setOptionUseAccountMarginStart(0);
+            optionUseAccount.setEnabled(true);
             optionUseAccount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -169,6 +225,7 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                     inputPassword.setEnabled(true);
                 }
             });
+            optionAnonymous.setVisibility(View.VISIBLE);
             optionAnonymous.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,15 +236,6 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                 }
             });
         }
-
-        buttonSend.setImageResource(ColorUtils.isDark(ThemeUtils.getColorAccent(this)) ?
-                R.drawable.air_ic_send_dark : R.drawable.air_ic_send_light);
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reportIssue();
-            }
-        });
     }
 
     private void reportIssue() {
@@ -345,6 +393,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
     protected final void setGuestToken(String token) {
         this.token = token;
+        Log.d(TAG, "GuestToken: " + token);
+        updateGuestTokenViews();
     }
 
     private static class ReportIssueTask extends DialogAsyncTask<Void, Void, String> {
@@ -506,12 +556,12 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         }
 
         @Nullable
-        protected Context getContext() {
+        Context getContext() {
             return contextWeakReference.get();
         }
 
         @Nullable
-        protected Dialog getDialog() {
+        Dialog getDialog() {
             return dialogWeakReference.get();
         }
 
