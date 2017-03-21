@@ -42,7 +42,7 @@ repositories {
 ````
 ````gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:1.3.0'
+    compile 'com.heinrichreimersoftware:android-issue-reporter:1.3.1'
 }
 ````
 
