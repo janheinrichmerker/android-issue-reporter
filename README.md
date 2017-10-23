@@ -122,6 +122,7 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
     <item name="colorPrimary">...</item><!-- required -->
     <item name="colorPrimaryDark">...</item><!-- required -->
     <item name="colorAccent">...</item><!-- required -->
+    <item name="android:textColorPrimary">...</item><!-- required for pre-lollipop devices.->
 </style>
 ```
 
