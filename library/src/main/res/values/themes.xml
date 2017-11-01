@@ -29,7 +29,7 @@
         <item name="colorButtonNormal">?colorAccent</item>
         <item name="md_dark_theme">true</item>
         <item name="md_background_color">#424242</item>
-        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
     <style name="Theme.IssueReporter.Light" parent="Theme.AppCompat.Light.NoActionBar">
