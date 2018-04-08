@@ -90,7 +90,9 @@ public class ExampleReporterActivity extends IssueReporterActivity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // [Optional] Auth token to open issues if users don't have a GitHub account
+        super.onCreate(savedInstanceState);
+
+	// [Optional] Auth token to open issues if users don't have a GitHub account
         // You can register a bot account on GitHub and copy ist OAuth2 token here.
         // (See #how-to-create-a-bot-key for further information.)
         setGuestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
