@@ -32,17 +32,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -56,6 +45,9 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.heinrichreimersoftware.androidissuereporter.model.DeviceInfo;
 import com.heinrichreimersoftware.androidissuereporter.model.Report;
 import com.heinrichreimersoftware.androidissuereporter.model.github.ExtraInfo;
@@ -73,6 +65,15 @@ import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringDef;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import static android.util.Patterns.EMAIL_ADDRESS;
 
@@ -133,23 +134,23 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        toolbar = (Toolbar) findViewById(R.id.air_toolbar);
+        toolbar = findViewById(R.id.air_toolbar);
 
-        inputTitle = (TextInputEditText) findViewById(R.id.air_inputTitle);
-        inputDescription = (TextInputEditText) findViewById(R.id.air_inputDescription);
-        textDeviceInfo = (TextView) findViewById(R.id.air_textDeviceInfo);
-        buttonDeviceInfo = (ImageButton) findViewById(R.id.air_buttonDeviceInfo);
-        layoutDeviceInfo = (ExpandableRelativeLayout) findViewById(R.id.air_layoutDeviceInfo);
+        inputTitle = findViewById(R.id.air_inputTitle);
+        inputDescription = findViewById(R.id.air_inputDescription);
+        textDeviceInfo = findViewById(R.id.air_textDeviceInfo);
+        buttonDeviceInfo = findViewById(R.id.air_buttonDeviceInfo);
+        layoutDeviceInfo = findViewById(R.id.air_layoutDeviceInfo);
 
-        inputUsername = (TextInputEditText) findViewById(R.id.air_inputUsername);
-        inputPassword = (TextInputEditText) findViewById(R.id.air_inputPassword);
-        inputEmail = (TextInputEditText) findViewById(R.id.air_inputEmail);
-        optionUseAccount = (RadioButton) findViewById(R.id.air_optionUseAccount);
-        optionAnonymous = (RadioButton) findViewById(R.id.air_optionAnonymous);
-        layoutLogin = (ExpandableRelativeLayout) findViewById(R.id.air_layoutLogin);
-        layoutAnonymous = (ExpandableRelativeLayout) findViewById(R.id.air_layoutGuest);
+        inputUsername = findViewById(R.id.air_inputUsername);
+        inputPassword = findViewById(R.id.air_inputPassword);
+        inputEmail = findViewById(R.id.air_inputEmail);
+        optionUseAccount = findViewById(R.id.air_optionUseAccount);
+        optionAnonymous = findViewById(R.id.air_optionAnonymous);
+        layoutLogin = findViewById(R.id.air_layoutLogin);
+        layoutAnonymous = findViewById(R.id.air_layoutGuest);
 
-        buttonSend = (FloatingActionButton) findViewById(R.id.air_buttonSend);
+        buttonSend = findViewById(R.id.air_buttonSend);
     }
 
     private void initViews() {
