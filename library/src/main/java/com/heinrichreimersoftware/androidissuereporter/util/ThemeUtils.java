@@ -26,13 +26,14 @@ package com.heinrichreimersoftware.androidissuereporter.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleableRes;
 import android.util.TypedValue;
 
 import com.heinrichreimersoftware.androidissuereporter.R;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleableRes;
 
 public class ThemeUtils {
     @ColorInt

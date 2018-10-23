@@ -27,10 +27,6 @@ package com.heinrichreimersoftware.androidissuereporter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +34,11 @@ import android.view.View;
 
 import com.heinrichreimersoftware.androidissuereporter.model.github.ExtraInfo;
 import com.heinrichreimersoftware.androidissuereporter.model.github.GithubTarget;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 
 import static com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher.Activity.EXTRA_EXTRA_INFO;
 import static com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher.Activity.EXTRA_GUEST_EMAIL_REQUIRED;
