@@ -1,0 +1,60 @@
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2017 Jan Heinrich Reimer
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<resources>
+    <string name="air_title_report_issue">버그 신고하기</string>
+
+    <string name="air_title_issue">오류 내용</string>
+    <string name="air_title_login">로그인</string>
+
+    <string name="air_label_issue_title">제목</string>
+    <string name="air_label_issue_description">내용</string>
+    <string name="air_label_device_info">기기 정보</string>
+
+    <string name="air_label_use_account">GitHub로 보내기</string>
+    <string name="air_label_use_email">E-mail로 보내기</string>
+    <string name="air_label_use_guest">익명으로 보내기</string>
+    <string name="air_label_username">아이디</string>
+    <string name="air_label_password">비밀번호</string>
+    <string name="air_label_email">E-mail</string>
+    <string name="air_label_email_optional">E-mail(선택)</string>
+
+    <string name="air_error_no_title">제목을 입력해주세요</string>
+    <string name="air_error_no_description">내용을 입력해주세요</string>
+    <plurals name="air_error_short_description">
+        <item quantity="one">내용을 %d글자 이상 입력해주세요</item>
+        <item quantity="other">내용을 %d글자 이상 입력해주세요</item>
+    </plurals>
+    <string name="air_error_no_username">유효한 GitHub 아이디를 입력해주세요</string>
+    <string name="air_error_no_password">유효한 GitHub 비밀번호를 입력해주세요</string>
+    <string name="air_error_no_email">E-mail을 입력해주세요</string>
+
+    <string name="air_dialog_title_loading">GitHub에 업로드 하는중…</string>
+    <string name="air_dialog_title_failed">버그신고를 실패하였습니다</string>
+    <string name="air_dialog_description_failed_wrong_credentials">username혹은 비밀번호가 틀렸습니다</string>
+    <string name="air_dialog_description_failed_invalid_token">Invalid access token. 개발자한테 연락하세요.</string>
+    <string name="air_dialog_description_failed_issues_not_available">선택한 repository에 문제가 활성화 되지 않았습니다. 개발자한테 연락하세요.</string>
+    <string name="air_dialog_description_failed_unknown">알수없는 문제가 발생하였습니다. 개발자한테 연락하세요.</string>
+    <string name="air_dialog_action_failed">확인</string>
+</resources>
