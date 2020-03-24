@@ -1,0 +1,60 @@
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2020 Jan Heinrich Reimer
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<resources>
+    <string name="air_title_report_issue">Reportar problema</string>
+
+    <string name="air_title_issue">Problema</string>
+    <string name="air_title_login">Login</string>
+
+    <string name="air_label_issue_title">Título</string>
+    <string name="air_label_issue_description">Descripción</string>
+    <string name="air_label_device_info">Información del dispositivo</string>
+
+    <string name="air_label_use_account">Enviar usando cuenta de GitHub</string>
+    <string name="air_label_use_email">Enviar usando E-mail</string>
+    <string name="air_label_use_guest">Enviar de forma anónima</string>
+    <string name="air_label_username">Usuario</string>
+    <string name="air_label_password">Contraseña</string>
+    <string name="air_label_email">E-mail</string>
+    <string name="air_label_email_optional">E-mail (opcional)</string>
+
+    <string name="air_error_no_title">Por favor introduce un título para el problema</string>
+    <string name="air_error_no_description">Por favor introduce la descripción del problema</string>
+    <plurals name="air_error_short_description">
+        <item quantity="one">La descripción tiene que tener por lo menos %d carácter</item>
+        <item quantity="other">La descripción tiene que tener por lo menos %d caracteres</item>
+    </plurals>
+    <string name="air_error_no_username">Por favor introduce tu nombre de usuario correcto de GitHub</string>
+    <string name="air_error_no_password">Por favor introduce tu contraseña correcta de GitHub</string>
+    <string name="air_error_no_email">Por favor introduce una dirección de e-mail</string>
+
+    <string name="air_dialog_title_loading">Subiendo reporte a GitHub…</string>
+    <string name="air_dialog_title_failed">Incapaz de enviar reporte</string>
+    <string name="air_dialog_description_failed_wrong_credentials">Usuario o contraseña incorrectos</string>
+    <string name="air_dialog_description_failed_invalid_token">Token de acceso inválido. Por favor contacta con el desarrollador.</string>
+    <string name="air_dialog_description_failed_issues_not_available">Issues no habilitadas en el repositorio elegido. Por favor contacta con el desarrollador.</string>
+    <string name="air_dialog_description_failed_unknown">Ha ocurrido un error inesperado. Por favor contacta con el desarrollador.</string>
+    <string name="air_dialog_action_failed">OK</string>
+</resources>
