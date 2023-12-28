@@ -22,7 +22,7 @@
   ~ SOFTWARE.
   -->
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,7 +33,7 @@
         android:orientation="vertical"
         android:padding="@dimen/air_baseline">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/air_title_issue"/>
@@ -75,7 +75,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/air_baseline">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -102,7 +102,7 @@
             app:ael_interpolator="fastOutSlowIn"
             app:ael_orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/air_textDeviceInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,4 +112,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
