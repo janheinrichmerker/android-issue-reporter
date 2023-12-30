@@ -1,1 +1,17 @@
-include ':library', ':example'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+}
+rootProject.name = 'android-issue-reporter'
+include ':library'
+include ':example'
