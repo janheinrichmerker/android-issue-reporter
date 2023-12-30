@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.progressindicator.LinearProgressIndicator
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progress_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:paddingBottom="30dp"
+    android:paddingEnd="30dp"
+    android:paddingStart="30dp"
+    android:paddingTop="30dp"
+    app:trackCornerRadius="2dp"
+    tools:progress="20" />
