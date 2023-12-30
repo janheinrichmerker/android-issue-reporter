@@ -25,8 +25,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardBackgroundColor="?cardBackgroundColor">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,9 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/air_title_login"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="?android:textColorSecondary"/>
+            android:text="@string/air_title_login"/>
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"

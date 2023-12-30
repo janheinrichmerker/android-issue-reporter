@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         IssueReporterLauncher.forTarget("HeinrichReimer", "android-issue-reporter")
-                                .theme(R.style.Theme_App_Dark)
+                                .theme(R.style.Theme_App)
                                 .putExtraInfo("Test 1", "Example string")
                                 .putExtraInfo("Test 2", true)
                                 .launch(MainActivity.this);

@@ -84,8 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/air_baseline"
-            app:srcCompat="@drawable/air_ic_send_light"
-            app:backgroundTint="?colorAccent"/>
+            app:srcCompat="@drawable/air_ic_send_light"/>
 
     </FrameLayout>
 
