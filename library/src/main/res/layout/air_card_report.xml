@@ -22,11 +22,10 @@
   ~ SOFTWARE.
   -->
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardBackgroundColor="?cardBackgroundColor">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,12 +33,10 @@
         android:orientation="vertical"
         android:padding="@dimen/air_baseline">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/air_title_issue"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="?android:textColorSecondary"/>
+            android:text="@string/air_title_issue"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -78,7 +75,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/air_baseline">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,7 +89,7 @@
                 android:padding="@dimen/air_icon_padding"
                 android:background="?selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/air_ic_expand_more"
-                android:tint="?android:textColorPrimary"
+                app:tint="?android:textColorPrimary"
                 android:contentDescription="@string/air_label_device_info"/>
 
         </LinearLayout>
@@ -105,16 +102,14 @@
             app:ael_interpolator="fastOutSlowIn"
             app:ael_orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/air_textDeviceInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/air_baseline_half"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="?android:textColorSecondary"/>
+                android:layout_marginTop="@dimen/air_baseline_half"/>
 
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

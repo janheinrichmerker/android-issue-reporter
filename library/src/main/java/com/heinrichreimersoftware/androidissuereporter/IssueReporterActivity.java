@@ -27,7 +27,6 @@ package com.heinrichreimersoftware.androidissuereporter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -35,6 +34,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
@@ -42,9 +42,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -418,10 +417,9 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            return new MaterialDialog.Builder(context)
-                    .progress(true, 0)
-                    .progressIndeterminateStyle(true)
-                    .title(R.string.air_dialog_title_loading)
+            return new MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.air_dialog_title_loading)
+                    .setView(LayoutInflater.from(context).inflate(R.layout.air_progress_dialog, null))
                     .show();
         }
 
@@ -469,44 +467,34 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
                     tryToFinishActivity();
                     break;
                 case RESULT_BAD_CREDENTIALS:
-                    new MaterialDialog.Builder(context)
-                            .title(R.string.air_dialog_title_failed)
-                            .content(R.string.air_dialog_description_failed_wrong_credentials)
-                            .positiveText(R.string.air_dialog_action_failed)
+                    new MaterialAlertDialogBuilder(context)
+                            .setTitle(R.string.air_dialog_title_failed)
+                            .setMessage(R.string.air_dialog_description_failed_wrong_credentials)
+                            .setPositiveButton(R.string.air_dialog_action_failed, null)
                             .show();
                     break;
                 case RESULT_INVALID_TOKEN:
-                    new MaterialDialog.Builder(context)
-                            .title(R.string.air_dialog_title_failed)
-                            .content(R.string.air_dialog_description_failed_invalid_token)
-                            .positiveText(R.string.air_dialog_action_failed)
+                    new MaterialAlertDialogBuilder(context)
+                            .setTitle(R.string.air_dialog_title_failed)
+                            .setMessage(R.string.air_dialog_description_failed_invalid_token)
+                            .setPositiveButton(R.string.air_dialog_action_failed, null)
                             .show();
                     break;
                 case RESULT_ISSUES_NOT_ENABLED:
-                    new MaterialDialog.Builder(context)
-                            .title(R.string.air_dialog_title_failed)
-                            .content(R.string.air_dialog_description_failed_issues_not_available)
-                            .positiveText(R.string.air_dialog_action_failed)
+                    new MaterialAlertDialogBuilder(context)
+                            .setTitle(R.string.air_dialog_title_failed)
+                            .setMessage(R.string.air_dialog_description_failed_issues_not_available)
+                            .setPositiveButton(R.string.air_dialog_action_failed, null)
                             .show();
                     break;
                 default:
-                    new MaterialDialog.Builder(context)
-                            .title(R.string.air_dialog_title_failed)
-                            .content(R.string.air_dialog_description_failed_unknown)
-                            .positiveText(R.string.air_dialog_action_failed)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog,
-                                                    @NonNull DialogAction which) {
-                                    tryToFinishActivity();
-                                }
-                            })
-                            .cancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    tryToFinishActivity();
-                                }
-                            })
+                    new MaterialAlertDialogBuilder(context)
+                            .setTitle(R.string.air_dialog_title_failed)
+                            .setMessage(R.string.air_dialog_description_failed_unknown)
+                            .setPositiveButton(
+                                    R.string.air_dialog_action_failed,
+                                    (dialog, button) -> tryToFinishActivity())
+                            .setOnCancelListener(dialog -> tryToFinishActivity())
                             .show();
                     break;
             }

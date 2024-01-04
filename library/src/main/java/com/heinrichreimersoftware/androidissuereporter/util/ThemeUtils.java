@@ -28,8 +28,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.TypedValue;
 
-import com.heinrichreimersoftware.androidissuereporter.R;
-
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -60,6 +58,6 @@ public class ThemeUtils {
 
     @ColorInt
     public static int getColorAccent(@NonNull Context context) {
-        return resolveThemeColor(context, R.attr.colorAccent);
+        return resolveThemeColor(context, com.google.android.material.R.attr.colorSecondary);
     }
 }

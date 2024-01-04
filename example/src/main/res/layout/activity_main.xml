@@ -34,10 +34,11 @@
         android:layout_height="wrap_content"
         android:theme="?actionBarTheme">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"/>
+            android:layout_height="wrap_content"
+            tools:title="android-issue-reporter"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,9 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/description_android_issue_reporter"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/optionGuestToken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,22 +63,22 @@
             android:checked="true"
             android:text="@string/label_option_guest_token"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonOpenReporter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/baseline"
             android:text="@string/label_open_reporter"
-            android:textColor="?android:textColorPrimaryInverse"/>
+            android:textColor="@color/design_default_color_on_primary"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/baseline"
             android:text="@string/title_token_not_working"
             android:textStyle="bold"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/description_token_not_working"

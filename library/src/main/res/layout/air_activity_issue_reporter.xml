@@ -35,10 +35,11 @@
         android:layout_height="wrap_content"
         android:theme="?actionBarTheme">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/air_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"/>
+            android:layout_height="wrap_content"
+            tools:title="android-issue-reporter"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/air_card_margin_top"/>
 
-                <androidx.legacy.widget.Space
+                <Space
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_margin="@dimen/air_baseline"/>
@@ -84,8 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/air_baseline"
-            app:srcCompat="@drawable/air_ic_send_light"
-            app:backgroundTint="?colorAccent"/>
+            app:srcCompat="@drawable/air_ic_send_light"/>
 
     </FrameLayout>
 

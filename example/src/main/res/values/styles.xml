@@ -24,15 +24,10 @@
 
 <resources>
 
-    <style name="Theme.App.Dark" parent="Theme.IssueReporter">
-        <item name="colorPrimary">#9B26AF</item>
-        <item name="colorPrimaryDark">#7A1EA1</item>
-        <item name="colorAccent">#68EFAD</item>
+    <style name="Theme.App" parent="Theme.IssueReporter">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme.App.Light" parent="Theme.IssueReporter.Light.DarkActionBar">
-        <item name="colorPrimary">#00BCD4</item>
-        <item name="colorPrimaryDark">#0097A7</item>
-        <item name="colorAccent">#FF3D00</item>
-    </style>
 </resources>
