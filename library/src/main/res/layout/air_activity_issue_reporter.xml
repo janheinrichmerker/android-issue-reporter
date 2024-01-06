@@ -60,11 +60,13 @@
                 android:clipToPadding="false">
 
                 <include
+                    android:id="@+id/air_card_report"
                     layout="@layout/air_card_report"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <include
+                    android:id="@+id/air_card_login"
                     layout="@layout/air_card_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
