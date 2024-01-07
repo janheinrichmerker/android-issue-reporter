@@ -104,6 +104,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/air_textDeviceInfo"
+                android:textIsSelectable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/air_baseline_half"/>
