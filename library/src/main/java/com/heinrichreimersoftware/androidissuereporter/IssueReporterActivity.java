@@ -27,7 +27,6 @@ package com.heinrichreimersoftware.androidissuereporter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,16 +36,15 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.heinrichreimersoftware.androidissuereporter.databinding.AirActivityIssueReporterBinding;
+import com.heinrichreimersoftware.androidissuereporter.databinding.AirCardLoginBinding;
+import com.heinrichreimersoftware.androidissuereporter.databinding.AirCardReportBinding;
 import com.heinrichreimersoftware.androidissuereporter.model.DeviceInfo;
 import com.heinrichreimersoftware.androidissuereporter.model.Report;
 import com.heinrichreimersoftware.androidissuereporter.model.github.ExtraInfo;
@@ -71,12 +69,14 @@ import androidx.annotation.StringDef;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NavUtils;
 
 import static android.util.Patterns.EMAIL_ADDRESS;
 
 public abstract class IssueReporterActivity extends AppCompatActivity {
+    private AirActivityIssueReporterBinding binding;
+    private AirCardReportBinding reportBinding;
+    private AirCardLoginBinding loginBinding;
     private static final String TAG = IssueReporterActivity.class.getSimpleName();
 
     private static final int STATUS_BAD_CREDENTIALS = 401;
@@ -93,22 +93,6 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private static final String RESULT_UNKNOWN = "RESULT_UNKNOWN";
     private boolean emailRequired = false;
     private int bodyMinChar = 0;
-    private Toolbar toolbar;
-    private TextInputEditText inputTitle;
-    private TextInputEditText inputDescription;
-    private TextView textDeviceInfo;
-    private ImageButton buttonDeviceInfo;
-    private ExpandableRelativeLayout layoutDeviceInfo;
-    private ExpandableRelativeLayout layoutAnonymous;
-    private TextInputEditText inputUsername;
-    private TextInputEditText inputPassword;
-    private TextInputEditText inputEmail;
-    private RadioButton optionUseAccount;
-    private RadioButton optionAnonymous;
-    private ExpandableRelativeLayout layoutLogin;
-    private FloatingActionButton buttonSend;
-
-    private Drawable optionUseAccountButtonDrawable = null;
 
     private String token;
 
@@ -119,8 +103,10 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(getTitle()))
             setTitle(R.string.air_title_report_issue);
 
-        setContentView(R.layout.air_activity_issue_reporter);
-        findViews();
+        binding = AirActivityIssueReporterBinding.inflate(getLayoutInflater());
+        reportBinding = binding.airCardReport;
+        loginBinding = binding.airCardLogin;
+        setContentView(binding.getRoot());
 
         //noinspection deprecation
         token = getGuestToken();
@@ -129,51 +115,31 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
 
         DeviceInfo deviceInfo = new DeviceInfo(this);
-        textDeviceInfo.setText(deviceInfo.toString());
-    }
-
-    private void findViews() {
-        toolbar = findViewById(R.id.air_toolbar);
-
-        inputTitle = findViewById(R.id.air_inputTitle);
-        inputDescription = findViewById(R.id.air_inputDescription);
-        textDeviceInfo = findViewById(R.id.air_textDeviceInfo);
-        buttonDeviceInfo = findViewById(R.id.air_buttonDeviceInfo);
-        layoutDeviceInfo = findViewById(R.id.air_layoutDeviceInfo);
-
-        inputUsername = findViewById(R.id.air_inputUsername);
-        inputPassword = findViewById(R.id.air_inputPassword);
-        inputEmail = findViewById(R.id.air_inputEmail);
-        optionUseAccount = findViewById(R.id.air_optionUseAccount);
-        optionAnonymous = findViewById(R.id.air_optionAnonymous);
-        layoutLogin = findViewById(R.id.air_layoutLogin);
-        layoutAnonymous = findViewById(R.id.air_layoutGuest);
-
-        buttonSend = findViewById(R.id.air_buttonSend);
+        reportBinding.airTextDeviceInfo.setText(deviceInfo.toString());
     }
 
     private void initViews() {
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.airToolbar);
 
         if (NavUtils.getParentActivityName(this) != null) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
-                toolbar.setContentInsetsRelative(
+                binding.airToolbar.setContentInsetsRelative(
                         getResources().getDimensionPixelSize(R.dimen.air_baseline_content),
                         getResources().getDimensionPixelSize(R.dimen.air_baseline));
             }
         }
 
-        buttonDeviceInfo.setOnClickListener(new View.OnClickListener() {
+        reportBinding.airButtonDeviceInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutDeviceInfo.toggle();
+                binding.airCardReport.airLayoutDeviceInfo.toggle();
             }
         });
 
 
-        inputPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        loginBinding.airInputPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
@@ -186,9 +152,9 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         updateGuestTokenViews();
 
-        buttonSend.setImageResource(ColorUtils.isDark(ThemeUtils.getColorAccent(this)) ?
+        binding.airButtonSend.setImageResource(ColorUtils.isDark(ThemeUtils.getColorAccent(this)) ?
                 R.drawable.air_ic_send_dark : R.drawable.air_ic_send_light);
-        buttonSend.setOnClickListener(new View.OnClickListener() {
+        binding.airButtonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reportIssue();
@@ -197,13 +163,13 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     }
 
     private void setOptionUseAccountMarginStart(int marginStart) {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) optionUseAccount.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) loginBinding.airOptionUseAccount.getLayoutParams();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             layoutParams.setMarginStart(marginStart);
         } else {
             layoutParams.leftMargin = marginStart;
         }
-        optionUseAccount.setLayoutParams(layoutParams);
+        loginBinding.airOptionUseAccount.setLayoutParams(layoutParams);
     }
 
     private void updateGuestTokenViews() {
@@ -211,28 +177,28 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
             int baseline = getResources().getDimensionPixelSize(R.dimen.air_baseline);
             int radioButtonPaddingStart = getResources().getDimensionPixelSize(R.dimen.air_radio_button_padding_start);
             setOptionUseAccountMarginStart(-2 * baseline - radioButtonPaddingStart);
-            optionUseAccount.setEnabled(false);
-            optionAnonymous.setVisibility(View.GONE);
+            loginBinding.airOptionUseAccount.setEnabled(false);
+            loginBinding.airOptionAnonymous.setVisibility(View.GONE);
         } else {
             setOptionUseAccountMarginStart(0);
-            optionUseAccount.setEnabled(true);
-            optionUseAccount.setOnClickListener(new View.OnClickListener() {
+            loginBinding.airOptionUseAccount.setEnabled(true);
+            loginBinding.airOptionUseAccount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    layoutLogin.expand();
-                    layoutAnonymous.collapse();
-                    inputUsername.setEnabled(true);
-                    inputPassword.setEnabled(true);
+                    loginBinding.airLayoutLogin.expand();
+                    loginBinding.airLayoutGuest.collapse();
+                    loginBinding.airInputUsername.setEnabled(true);
+                    loginBinding.airInputPassword.setEnabled(true);
                 }
             });
-            optionAnonymous.setVisibility(View.VISIBLE);
-            optionAnonymous.setOnClickListener(new View.OnClickListener() {
+            loginBinding.airOptionAnonymous.setVisibility(View.VISIBLE);
+            loginBinding.airOptionAnonymous.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    layoutLogin.collapse();
-                    layoutAnonymous.expand();
-                    inputUsername.setEnabled(false);
-                    inputPassword.setEnabled(false);
+                    loginBinding.airLayoutLogin.collapse();
+                    loginBinding.airLayoutGuest.expand();
+                    loginBinding.airInputUsername .setEnabled(false);
+                    loginBinding.airInputPassword.setEnabled(false);
                 }
             });
         }
@@ -242,18 +208,18 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
 
         if (!validateInput()) return;
 
-        if (optionUseAccount.isChecked()) {
-            String username = inputUsername.getText().toString();
-            String password = inputPassword.getText().toString();
+        if (loginBinding.airOptionUseAccount.isChecked()) {
+            String username = loginBinding.airInputUsername.getText().toString();
+            String password = loginBinding.airInputPassword.getText().toString();
             sendBugReport(new GithubLogin(username, password), null);
         } else {
             if (TextUtils.isEmpty(token))
                 throw new IllegalStateException("You must provide a GitHub API Token.");
 
             String email = null;
-            if (!TextUtils.isEmpty(inputEmail.getText()) &&
-                    EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
-                email = inputEmail.getText().toString();
+            if (!TextUtils.isEmpty(loginBinding.airInputEmail.getText()) &&
+                    EMAIL_ADDRESS.matcher(loginBinding.airInputEmail.getText().toString()).matches()) {
+                email = loginBinding.airInputEmail.getText().toString();
             }
 
             sendBugReport(new GithubLogin(token), email);
@@ -263,52 +229,52 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private boolean validateInput() {
         boolean hasErrors = false;
 
-        if (optionUseAccount.isChecked()) {
-            if (TextUtils.isEmpty(inputUsername.getText())) {
-                setError(inputUsername, R.string.air_error_no_username);
+        if (loginBinding.airOptionUseAccount.isChecked()) {
+            if (TextUtils.isEmpty(loginBinding.airInputUsername.getText())) {
+                setError(loginBinding.airInputUsername, R.string.air_error_no_username);
                 hasErrors = true;
             } else {
-                removeError(inputUsername);
+                removeError(loginBinding.airInputUsername);
             }
 
-            if (TextUtils.isEmpty(inputPassword.getText())) {
-                setError(inputPassword, R.string.air_error_no_password);
+            if (TextUtils.isEmpty(loginBinding.airInputPassword.getText())) {
+                setError(loginBinding.airInputPassword, R.string.air_error_no_password);
                 hasErrors = true;
             } else {
-                removeError(inputPassword);
+                removeError(loginBinding.airInputPassword);
             }
         } else {
             if (emailRequired) {
-                if (TextUtils.isEmpty(inputEmail.getText()) ||
-                        !EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()) {
-                    setError(inputEmail, R.string.air_error_no_email);
+                if (TextUtils.isEmpty(loginBinding.airInputEmail.getText()) ||
+                        !EMAIL_ADDRESS.matcher(loginBinding.airInputEmail.getText().toString()).matches()) {
+                    setError(loginBinding.airInputEmail, R.string.air_error_no_email);
                     hasErrors = true;
                 } else {
-                    removeError(inputEmail);
+                    removeError(loginBinding.airInputEmail);
                 }
             }
         }
 
-        if (TextUtils.isEmpty(inputTitle.getText())) {
-            setError(inputTitle, R.string.air_error_no_title);
+        if (TextUtils.isEmpty(reportBinding.airInputTitle.getText())) {
+            setError(reportBinding.airInputTitle, R.string.air_error_no_title);
             hasErrors = true;
         } else {
-            removeError(inputTitle);
+            removeError(reportBinding.airInputTitle);
         }
 
-        if (TextUtils.isEmpty(inputDescription.getText())) {
-            setError(inputDescription, R.string.air_error_no_description);
+        if (TextUtils.isEmpty(reportBinding.airInputDescription.getText())) {
+            setError(reportBinding.airInputDescription, R.string.air_error_no_description);
             hasErrors = true;
         } else {
             if (bodyMinChar > 0) {
-                if (inputDescription.getText().toString().length() < bodyMinChar) {
-                    setError(inputDescription, getResources().getQuantityString(R.plurals.air_error_short_description, bodyMinChar, bodyMinChar));
+                if (reportBinding.airInputDescription.getText().toString().length() < bodyMinChar) {
+                    setError(reportBinding.airInputDescription, getResources().getQuantityString(R.plurals.air_error_short_description, bodyMinChar, bodyMinChar));
                     hasErrors = true;
                 } else {
-                    removeError(inputDescription);
+                    removeError(reportBinding.airInputDescription);
                 }
             } else
-                removeError(inputDescription);
+                removeError(reportBinding.airInputDescription);
         }
         return !hasErrors;
     }
@@ -352,8 +318,8 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     private void sendBugReport(GithubLogin login, String email) {
         if (!validateInput()) return;
 
-        String bugTitle = inputTitle.getText().toString();
-        String bugDescription = inputDescription.getText().toString();
+        String bugTitle = reportBinding.airInputTitle.getText().toString();
+        String bugDescription = reportBinding.airInputDescription.getText().toString();
 
         DeviceInfo deviceInfo = new DeviceInfo(this);
 
@@ -369,11 +335,11 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
     protected final void setGuestEmailRequired(boolean required) {
         this.emailRequired = required;
         if (required) {
-            optionAnonymous.setText(R.string.air_label_use_email);
-            ((TextInputLayout) findViewById(R.id.air_inputEmailParent)).setHint(getString(R.string.air_label_email));
+            loginBinding.airOptionAnonymous.setText(R.string.air_label_use_email);
+            loginBinding.airInputEmailParent.setHint(getString(R.string.air_label_email));
         } else {
-            optionAnonymous.setText(R.string.air_label_use_guest);
-            ((TextInputLayout) findViewById(R.id.air_inputEmailParent)).setHint(getString(R.string.air_label_email_optional));
+            loginBinding.airOptionAnonymous.setText(R.string.air_label_use_guest);
+            loginBinding.airInputEmailParent.setHint(getString(R.string.air_label_email_optional));
         }
     }
 
