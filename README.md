@@ -1,9 +1,13 @@
 ![Icon](http://i.imgur.com/CoPArlm.png)
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-brightgreen.svg?style=flat&v=2)](http://android-arsenal.com/details/1/3413)
-[![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/android-issue-reporter.svg)](https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter)
-[![Build Status](https://travis-ci.org/heinrichreimer/android-issue-reporter.svg?branch=master)](https://travis-ci.org/heinrichreimer/android-issue-reporter)
-[![License](https://img.shields.io/github/license/heinrichreimer/android-issue-reporter.svg)](https://github.com/heinrichreimer/android-issue-reporter/blob/master/LICENSE.txt)
+[![CI status](https://img.shields.io/github/actions/workflow/status/heinrichreimer/android-issue-reporter/ci.yml?branch=master&style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/actions/workflows/ci.yml)
+![JitPack](https://img.shields.io/jitpack/version/com.github.heinrichreimer/android-issue-reporter?label=JitPack&style=flat-square)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-blue.svg?style=flat-square)](https://android-arsenal.com/details/1/3413)
+[![Issues](https://img.shields.io/github/issues/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/pulls)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/commits)
+[![Maintenance](https://img.shields.io/maintenance/yes/2024?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/graphs/contributors)
+[![License](https://img.shields.io/github/license/heinrichreimer/android-issue-reporter?style=flat-square)](LICENSE)
 
 # android-issue-reporter
 
