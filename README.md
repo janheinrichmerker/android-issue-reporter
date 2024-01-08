@@ -1,59 +1,68 @@
 ![Icon](http://i.imgur.com/CoPArlm.png)
 
-android-issue-reporter
-===============
-
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-brightgreen.svg?style=flat&v=2)](http://android-arsenal.com/details/1/3413)
 [![JitPack](https://jitpack.io/v/com.heinrichreimersoftware/android-issue-reporter.svg)](https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter)
 [![Build Status](https://travis-ci.org/heinrichreimer/android-issue-reporter.svg?branch=master)](https://travis-ci.org/heinrichreimer/android-issue-reporter)
 [![License](https://img.shields.io/github/license/heinrichreimer/android-issue-reporter.svg)](https://github.com/heinrichreimer/android-issue-reporter/blob/master/LICENSE.txt)
 
-Based on [Paolo Rotolo](https://github.com/PaoloRotolo)'s [Gitty Reporter](https://github.com/PaoloRotolo/GittyReporter)
+# android-issue-reporter
 
-Is your Inbox full of bug reports and requests from your users?
+Is your mailbox full of bug reports and feature requests from your app users? \
+_android-issue-reporter_ is a new material designed library to report issues from your app directly to GitHub, even without an account.
 
-*android-issue-reporter* is a new material designed library to report issues from your app directly to GitHub, even without an account.
+This library is inspired by [Paolo Rotolo](https://github.com/PaoloRotolo)'s [Gitty Reporter](https://github.com/PaoloRotolo/GittyReporter)
 
-Demo
-----
+## Demo
+
 A demo app is available on Google Play:
 
 <a href="https://play.google.com/store/apps/details?id=com.heinrichreimersoftware.androidissuereporter.example">
 	<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60" />
 </a>
 
-Screenshots
------------
+## Screenshots
 
-| ![material-drawer](http://i.imgur.com/ADkPQMo.png) | ![material-drawer](http://i.imgur.com/fcFmJ5E.png) | ![material-drawer](http://i.imgur.com/dJYonBW.png) |
+| ![GitHub bot](http://i.imgur.com/ADkPQMo.png) | ![Include device info](http://i.imgur.com/fcFmJ5E.png) | ![Demo](http://i.imgur.com/dJYonBW.png) |
 |:-:|:-:|:-:|
 | GitHub bot | Include device info | Demo |
 
-Dependency
-----------
+## Installation
 
-*android-issue-reporter* is available on [**jitpack.io**][J]
+Install _android-issue-reporter_ from [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter):
 
-**Gradle dependency:**
-````gradle
-repositories {
-    maven { url 'https://jitpack.io' }
+Add the JitPack repository in your root `build.gradle` at the end of repositories:
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
-````
-````gradle
+
+```
+
+Then, add the _android-issue-reporter_ dependency:
+
+```gradle
 dependencies {
-    compile 'com.heinrichreimersoftware:android-issue-reporter:1.3.1'
+    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4.0'
 }
-````
+```
 
-Get the latest dependency at [jitpack.io][J].
+Get the latest dependency at [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter).
 
-How to use (with `IssueReporterLauncher`)
------------
-Just start the issue reporter directly from your activity using the launcher builder:
+
+## Usage
+
+### Launch from anywhere with `IssueReporterLauncher`
+
+Just start the issue reporter directly from your activity using the fluent launcher builder:
 
 ```java
-IssueReporterLauncher.forTarget("HeinrichReimer", "android-issue-reporter")
+IssueReporterLauncher
+        .forTarget("HeinrichReimer", "android-issue-reporter")
         // [Recommended] Theme to use for the reporter. 
         // (See #theming for further information.)
         .theme(R.style.Theme_App_Dark)
@@ -75,9 +84,9 @@ IssueReporterLauncher.forTarget("HeinrichReimer", "android-issue-reporter")
         .launch(this);
 ```
 
-How to use (extending `IssueReporterActivity`)
------------
-Just create a new `Activity` that extends `IssueReporterActivity`:
+### Extending `IssueReporterActivity`
+
+Alternatively, if you need to further customize the issue reporter, create a new `Activity` class that extends `IssueReporterActivity`:
 
 ```java
 public class ExampleReporterActivity extends IssueReporterActivity {
@@ -115,32 +124,26 @@ public class ExampleReporterActivity extends IssueReporterActivity {
 }
 ```
 
-Theming
----
+### Theming
 Create a theme extending `Theme.IssueReporter` theme and set it to the launcher using `IssueReporterLauncher.theme(@StyleRes int theme)` or declare it in `AndroidManifest.xml` if you have extended `IssueReporterActivity`:
 
 ```xml
-<style name="Theme.App.Light" parent="Theme.IssueReporter">
+<style name="Theme.App" parent="Theme.IssueReporter">
     <item name="colorPrimary">...</item><!-- required -->
     <item name="colorPrimaryDark">...</item><!-- required -->
     <item name="colorAccent">...</item><!-- required -->
 </style>
 ```
 
-You can use `Theme.IssueReporter.Light` or `Theme.IssueReporter.Light.DarkActionBar` as replacement if you want a light theme.
+### Creating a GitHub bot key
 
-How to create a bot key
----
+1.  Create a new GitHub account. _(You have to use a unique email address.)_
 
-1.  Create a new GitHub account.  
-    _(You have to use a unique email address.)_
-
-2.  Go to https://github.com/settings/tokens and create a new token using <kbd>Generate new token</kbd>.  
-    _(You only need to give the bot the `public_repo` permission.)_
+2.  Go to https://github.com/settings/tokens and create a new token using <kbd>Generate new token</kbd>. _(Only the `public_repo` permission is needed.)_
 
 3.  Copy the OAuth access token you get at the end of the setup.
 
-4.  Override `getGuestToken()` in your reporter activity like this:
+4.  Use the token in `IssueReporterLauncher.theme(String token)` or override `getGuestToken()` in your reporter activity like this:
     
     ```java
     @Override
@@ -148,9 +151,6 @@ How to create a bot key
         return "<your token here>";
     }
     ```
-    
-Limitations
----
-- You can't use two factor authentication.
 
-[J]: https://jitpack.io/#com.heinrichreimersoftware/android-issue-reporter
+## Known Limitations
+- Two factor authentication is not supported.
