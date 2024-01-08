@@ -1,7 +1,7 @@
 ![Icon](http://i.imgur.com/CoPArlm.png)
 
 [![CI status](https://img.shields.io/github/actions/workflow/status/heinrichreimer/android-issue-reporter/ci.yml?branch=master&style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/actions/workflows/ci.yml)
-![JitPack](https://img.shields.io/jitpack/version/com.github.heinrichreimer/android-issue-reporter?label=JitPack&style=flat-square)
+[![JitPack](https://img.shields.io/jitpack/version/com.github.heinrichreimer/android-issue-reporter?label=JitPack&style=flat-square)](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-blue.svg?style=flat-square)](https://android-arsenal.com/details/1/3413)
 [![Issues](https://img.shields.io/github/issues/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/pulls)
@@ -18,7 +18,7 @@ This library is inspired by [Paolo Rotolo](https://github.com/PaoloRotolo)'s [Gi
 
 ## Demo
 
-A demo app is available on Google Play:
+Download the demo app from the Google Play Store.
 
 <a href="https://play.google.com/store/apps/details?id=com.heinrichreimersoftware.androidissuereporter.example">
 	<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60" />
@@ -51,11 +51,11 @@ Then, add the _android-issue-reporter_ dependency:
 
 ```gradle
 dependencies {
-    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4.0'
+    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4'
 }
 ```
 
-Get the latest dependency at [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter).
+Get the latest dependency version at [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter).
 
 
 ## Usage
@@ -156,5 +156,20 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
     }
     ```
 
-## Known Limitations
+### Known Limitations
 - Two factor authentication is not supported.
+
+## Development
+
+To contribute to the _android-issue-reporter_ library, just [create a codespace](https://codespaces.new/heinrichreimer/android-issue-reporter) from this repository or clone it in an editor that supports [Dev Containers](https://containers.dev/) (e.g., [Visual Studio Code](https://code.visualstudio.com/learn/develop-cloud/containers) or [IntelliJ](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html)).
+All required dependencies will automatically be installed for you. \
+Once ready, [create a pull request](TODO) with your changes. We're happy to any contribution!
+
+## Support
+
+If you hit any problems using _android-issue-reporter_, please file an [issue](https://github.com/heinrichreimer/android-issue-reporter/issues). We're happy to help!
+
+## License
+
+This repository is released under the [MIT license](LICENSE).
+If you like _android-issue-reporter_, consider [sponsoring me](https://github.com/sponsors/heinrichreimer).
