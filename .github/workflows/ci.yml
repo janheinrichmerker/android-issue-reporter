@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  build:
+    name: 🏗️ Build Gradle project
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 Check-out
+      uses: actions/checkout@v3
+    - name: 🧰 Install JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: "17"
+        distribution: temurin
+        cache: gradle
+    - name: 🧰 Grant execute permission for Gradle wrapper
+      run: chmod +x gradlew
+    - name: 🏗️ Build with Gradle
+      run: ./gradlew build
