@@ -53,10 +53,9 @@ import com.heinrichreimersoftware.androidissuereporter.model.github.GithubTarget
 import com.heinrichreimersoftware.androidissuereporter.util.ColorUtils;
 import com.heinrichreimersoftware.androidissuereporter.util.ThemeUtils;
 
-import org.eclipse.egit.github.core.Issue;
-import org.eclipse.egit.github.core.client.GitHubClient;
-import org.eclipse.egit.github.core.client.RequestException;
-import org.eclipse.egit.github.core.service.IssueService;
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
+import org.kohsuke.github.HttpException;
 
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -392,19 +391,21 @@ public abstract class IssueReporterActivity extends AppCompatActivity {
         @Override
         @Result
         protected String doInBackground(Void... params) {
-            GitHubClient client;
-            if (login.shouldUseApiToken()) {
-                client = new GitHubClient().setOAuth2Token(login.getApiToken());
-            } else {
-                client = new GitHubClient().setCredentials(login.getUsername(), login.getPassword());
-            }
-
-            Issue issue = new Issue().setTitle(report.getTitle()).setBody(report.getDescription());
+            GitHub client;
+            String repoName = target.getUsername() + "/" + target.getRepository();
             try {
-                new IssueService(client).createIssue(target.getUsername(), target.getRepository(), issue);
+                if (login.shouldUseApiToken()) {
+                    client = new GitHubBuilder().withOAuthToken(login.getApiToken()).build();
+                } else {
+                    client = new GitHubBuilder().withPassword(login.getUsername(), login.getPassword()).build();
+                }
+                client.getRepository(repoName)
+                        .createIssue(report.getTitle())
+                        .body(report.getDescription())
+                        .create();
                 return RESULT_OK;
-            } catch (RequestException e) {
-                switch (e.getStatus()) {
+            } catch (HttpException e) {
+                switch (e.getResponseCode()) {
                     case STATUS_BAD_CREDENTIALS:
                         if (login.shouldUseApiToken())
                             return RESULT_INVALID_TOKEN;
