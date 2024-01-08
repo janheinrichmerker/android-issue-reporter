@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 def versionMajor = 1
@@ -39,4 +40,14 @@ dependencies {
     implementation 'org.kohsuke:github-api:1.318'
     implementation 'com.afollestad.material-dialogs:core:0.8.5.9'
     implementation 'com.github.aakira:expandable-layout:1.4.3@aar'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
+        }
+    }
 }
