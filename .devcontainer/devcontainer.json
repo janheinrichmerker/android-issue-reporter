@@ -1,11 +1,10 @@
 {
 	"name": "Java",
-	"image": "mcr.microsoft.com/devcontainers/java:1-17-buster",
+	"image": "mcr.microsoft.com/devcontainers/base:1",
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
-			"version": "none",
-			"installMaven": "false",
-			"installGradle": "true"
-		}
+			"version": "17",
+		},
+		"ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
 	}
 }
