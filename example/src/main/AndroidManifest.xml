@@ -26,6 +26,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:supportsRtl="true"

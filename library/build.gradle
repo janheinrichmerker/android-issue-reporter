@@ -34,7 +34,6 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.android.material:material:1.11.0'
 
     implementation 'org.kohsuke:github-api:1.318'
