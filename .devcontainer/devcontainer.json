@@ -5,6 +5,8 @@
 		"ghcr.io/devcontainers/features/java:1": {
 			"version": "17",
 		},
-		"ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
+		"ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {
+			"PACKAGES": "platform-tools,platforms;android-34,build-tools;34.0.0"
+		}
 	}
 }
