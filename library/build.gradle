@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
 
     implementation 'org.kohsuke:github-api:1.318'
-    implementation 'com.github.aakira:expandablelayout:1.5.0@aar'
+    implementation 'com.github.AAkira:ExpandableLayout:v1.5.0@aar'
 }
 
 afterEvaluate {
