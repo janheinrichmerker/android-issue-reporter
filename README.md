@@ -163,7 +163,7 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
 
 To contribute to the _android-issue-reporter_ library, just [create a codespace](https://codespaces.new/heinrichreimer/android-issue-reporter) from this repository or clone it in an editor that supports [Dev Containers](https://containers.dev/) (e.g., [Visual Studio Code](https://code.visualstudio.com/learn/develop-cloud/containers) or [IntelliJ](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html)).
 All required dependencies will automatically be installed for you. \
-Once ready, [create a pull request](TODO) with your changes. We're happy to any contribution!
+Once ready, [create a pull request](https://github.com/heinrichreimer/android-issue-reporter/compare) with your changes. We're happy to any contribution!
 
 ## Support
 
