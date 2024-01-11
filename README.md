@@ -32,31 +32,9 @@ Download the demo app from the Google Play Store.
 
 ## Installation
 
-### For Kotlin DSL Instalation:
-
 Add the _android-issue-reporter_ dependency:
 
-```kotlin
-dependencies {
-    implementation("com.github.heinrichreimer:android-issue-reporter:1.4")
-}
-```
-
-Then, add the JitPack repository in your root `build.gradle` at the end of repositories:
-
-```kotlin
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        maven(url = "https://jitpack.io")
-    }
-}
-```
-
-### For Gradle Instalation:
-
-Add the _android-issue-reporter_ dependency:
+<details open><summary>Groovy DSL</summary>
 
 ```gradle
 dependencies {
@@ -64,19 +42,45 @@ dependencies {
 }
 ```
 
-Then, add the JitPack repository in your root `build.gradle` at the end of repositories:
+</details>
+
+<details><summary>Kotlin DSL</summary>
+
+```kotlin
+dependencies {
+    implementation("com.github.heinrichreimer:android-issue-reporter:1.4")
+}
+```
+
+</details>
+
+Then, add the JitPack repository in your root `build.gradle` (or `build.gradle.kts`):
+
+<details open><summary>Groovy DSL</summary>
 
 ```gradle
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenCentral()
         maven { url 'https://jitpack.io' }
     }
 }
 ```
 
-Check out the latest dependency _android-issue-reporter_ from [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter):
+</details>
+
+<details><summary>Kotlin DSL</summary>
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        maven(url = "https://jitpack.io")
+    }
+}
+```
+
+</details>
+
+Check out the latest dependency _android-issue-reporter_ from [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter).
 
 ## Usage
 
@@ -84,11 +88,11 @@ Check out the latest dependency _android-issue-reporter_ from [jitpack.io](https
 
 Just start the issue reporter directly from your activity using the fluent launcher builder:
 
-### In Kotlin:
+<details open><summary>Java</summary>
 
-```kotlin
+```java
 IssueReporterLauncher
-        .forTarget("HeinrichReimer", "android-issue-reporter")
+        .forTarget("heinrichreimer", "android-issue-reporter")
         // [Recommended] Theme to use for the reporter. 
         // (See #theming for further information.)
         .theme(R.style.Theme_App_Dark)
@@ -96,7 +100,7 @@ IssueReporterLauncher
         // You can register a bot account on GitHub and copy ist OAuth2 token here.
         // (See #how-to-create-a-bot-key for further information.)
         .guestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
-        // [Optional] Force users to enter an email adress when the report is sent using
+        // [Optional] Force users to enter an email address when the report is sent using
         // the guest token.
         .guestEmailRequired(true)
         // [Optional] Set a minimum character limit for the description to filter out
@@ -105,77 +109,47 @@ IssueReporterLauncher
         // [Optional] Include other relevant info in the bug report (like custom variables)
         .putExtraInfo("Test 1", "Example string")
         .putExtraInfo("Test 2", true)
-        // [Optional] Disable back arrow in toolbar
+        // [Optional] Disable the back arrow in the toolbar
+        .homeAsUpEnabled(false)
+        .launch(this);
+```
+
+</details>
+
+<details><summary>Kotlin</summary>
+
+```kotlin
+IssueReporterLauncher
+        .forTarget("heinrichreimer", "android-issue-reporter")
+        // [Recommended] Theme to use for the reporter. 
+        // (See #theming for further information.)
+        .theme(R.style.Theme_App_Dark)
+        // [Optional] Auth token to open issues if users don't have a GitHub account
+        // You can register a bot account on GitHub and copy ist OAuth2 token here.
+        // (See #how-to-create-a-bot-key for further information.)
+        .guestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
+        // [Optional] Force users to enter an email address when the report is sent using
+        // the guest token.
+        .guestEmailRequired(true)
+        // [Optional] Set a minimum character limit for the description to filter out
+        // empty reports.
+        .minDescriptionLength(20)
+        // [Optional] Include other relevant info in the bug report (like custom variables)
+        .putExtraInfo("Test 1", "Example string")
+        .putExtraInfo("Test 2", true)
+        // [Optional] Disable the back arrow in the toolbar
         .homeAsUpEnabled(false)
         .launch(this)
 
 ```
 
-### In Java:
-```java
-IssueReporterLauncher
-        .forTarget("HeinrichReimer", "android-issue-reporter")
-        // [Recommended] Theme to use for the reporter. 
-        // (See #theming for further information.)
-        .theme(R.style.Theme_App_Dark)
-        // [Optional] Auth token to open issues if users don't have a GitHub account
-        // You can register a bot account on GitHub and copy ist OAuth2 token here.
-        // (See #how-to-create-a-bot-key for further information.)
-        .guestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
-        // [Optional] Force users to enter an email adress when the report is sent using
-        // the guest token.
-        .guestEmailRequired(true)
-        // [Optional] Set a minimum character limit for the description to filter out
-        // empty reports.
-        .minDescriptionLength(20)
-        // [Optional] Include other relevant info in the bug report (like custom variables)
-        .putExtraInfo("Test 1", "Example string")
-        .putExtraInfo("Test 2", true)
-        // [Optional] Disable back arrow in toolbar
-        .homeAsUpEnabled(false)
-        .launch(this);
-```
+</details>
 
 ### Extending `IssueReporterActivity`
 
 Alternatively, if you need to further customize the issue reporter, create a new `Activity` class that extends `IssueReporterActivity`:
 
-### In Kotlin:
-
-```kotlin
-class ExampleReporterActivity : IssueReporterActivity() {
-    // Where should the issues go?
-    // (http://github.com/username/repository)
-    override fun getTarget(): GithubTarget {
-        return GithubTarget("username", "repository")
-    }
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // [Optional] Auth token to open issues if users don't have a GitHub account
-        // You can register a bot account on GitHub and copy ist OAuth2 token here.
-        // (See #how-to-create-a-bot-key for further information.)
-        setGuestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
-        
-        // [Optional] Force users to enter an email adress when the report is sent using
-        // the guest token.
-        setGuestEmailRequired(true)
-        
-        // [Optional] Set a minimum character limit for the description to filter out
-        // empty reports.
-        setMinimumDescriptionLength(20)
-    }
-
-    // [Optional] Include other relevant info in the bug report (like custom variables)
-    override fun onSaveExtraInfo(extraInfo: ExtraInfo) {
-        extraInfo.put("Test 1", "Example string")
-        extraInfo.put("Test 2", true)
-    }
-}
-```
-
-### In Java:
+<details open><summary>Java</summary>
 
 ```java
 public class ExampleReporterActivity extends IssueReporterActivity {
@@ -213,6 +187,45 @@ public class ExampleReporterActivity extends IssueReporterActivity {
 }
 ```
 
+</details>
+
+<details><summary>Kotlin</summary>
+
+```kotlin
+class ExampleReporterActivity : IssueReporterActivity() {
+    // Where should the issues go?
+    // (http://github.com/username/repository)
+    override fun getTarget(): GithubTarget {
+        return GithubTarget("username", "repository")
+    }
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // [Optional] Auth token to open issues if users don't have a GitHub account
+        // You can register a bot account on GitHub and copy ist OAuth2 token here.
+        // (See #how-to-create-a-bot-key for further information.)
+        setGuestToken("28f479f73db97d912611b27579aad7a76ad2baf5")
+        
+        // [Optional] Force users to enter an email adress when the report is sent using
+        // the guest token.
+        setGuestEmailRequired(true)
+        
+        // [Optional] Set a minimum character limit for the description to filter out
+        // empty reports.
+        setMinimumDescriptionLength(20)
+    }
+
+    // [Optional] Include other relevant info in the bug report (like custom variables)
+    override fun onSaveExtraInfo(extraInfo: ExtraInfo) {
+        extraInfo.put("Test 1", "Example string")
+        extraInfo.put("Test 2", true)
+    }
+}
+```
+
+</details>
+
 ### Theming
 Create a theme extending `Theme.IssueReporter` theme and set it to the launcher using `IssueReporterLauncher.theme(@StyleRes int theme)` or declare it in `AndroidManifest.xml` if you have extended `IssueReporterActivity`:
 
@@ -234,15 +247,7 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
 
 4.  Use the token in `IssueReporterLauncher.theme(String token)` or override `getGuestToken()` in your reporter activity like this:
     
-    ### In Kotlin
-    ```kotlin
-    override fun getGuestToken(): String {
-        return "<your token here>"
-    }
-
-    ```
-
-    ### In Java:
+    <details open><summary>Java</summary>
 
     ```java
     @Override
@@ -250,6 +255,18 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
         return "<your token here>";
     }
     ```
+    
+    </details>
+    
+    <details><summary>Kotlin</summary>
+    
+    ```kotlin
+    override fun getGuestToken(): String {
+        return "<your token here>"
+    }
+    ```
+    
+    </details>
 
 ### Known Limitations
 - Two factor authentication is not supported.
