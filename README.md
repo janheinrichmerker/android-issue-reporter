@@ -38,7 +38,7 @@ Add the _android-issue-reporter_ dependency:
 
 ```gradle
 dependencies {
-    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4'
+    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4.2'
 }
 ```
 
@@ -48,7 +48,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.github.heinrichreimer:android-issue-reporter:1.4")
+    implementation("com.github.heinrichreimer:android-issue-reporter:1.4.2")
 }
 ```
 
