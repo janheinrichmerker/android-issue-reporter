@@ -32,7 +32,7 @@ Download the demo app from the Google Play Store.
 
 ## Installation
 
-Add the _android-issue-reporter_ dependency:
+Add the _android-issue-reporter_ dependency to your app's `build.gradle` (or `build.gradle.kts`):
 
 <details open><summary>Groovy DSL</summary>
 
@@ -54,7 +54,7 @@ dependencies {
 
 </details>
 
-Then, add the JitPack repository in your root `build.gradle` (or `build.gradle.kts`):
+Then, add the JitPack repository in your root `settings.gradle` (or `settings.gradle.kts`):
 
 <details open><summary>Groovy DSL</summary>
 
