@@ -10,10 +10,10 @@ jobs:
     steps:
     - name: 📥 Check-out
       uses: actions/checkout@v4
-    - name: 🧰 Install JDK 11
+    - name: 🧰 Install JDK
       uses: actions/setup-java@v4
       with:
-        java-version: "17"
+        java-version: 17
         distribution: temurin
         cache: gradle
     - name: 🧰 Grant execute permission for Gradle wrapper
