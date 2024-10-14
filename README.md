@@ -1,13 +1,13 @@
 ![Icon](http://i.imgur.com/CoPArlm.png)
 
-[![CI status](https://img.shields.io/github/actions/workflow/status/heinrichreimer/android-issue-reporter/ci.yml?branch=master&style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/actions/workflows/ci.yml)
-[![JitPack](https://img.shields.io/jitpack/version/com.github.heinrichreimer/android-issue-reporter?label=JitPack&style=flat-square)](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter)
+[![CI status](https://img.shields.io/github/actions/workflow/status/janheinrichmerker/android-issue-reporter/ci.yml?branch=master&style=flat-square)](https://github.com/janheinrichmerker/android-issue-reporter/actions/workflows/ci.yml)
+[![JitPack](https://img.shields.io/jitpack/version/com.github.janheinrichmerker/android-issue-reporter?label=JitPack&style=flat-square)](https://jitpack.io/#com.github.janheinrichmerker/android-issue-reporter)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--issue--reporter-blue.svg?style=flat-square)](https://android-arsenal.com/details/1/3413)
-[![Issues](https://img.shields.io/github/issues/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/issues)
-[![Pull requests](https://img.shields.io/github/issues-pr/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/pulls)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/heinrichreimer/android-issue-reporter?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/commits)
-[![Maintenance](https://img.shields.io/maintenance/yes/2024?style=flat-square)](https://github.com/heinrichreimer/android-issue-reporter/graphs/contributors)
-[![License](https://img.shields.io/github/license/heinrichreimer/android-issue-reporter?style=flat-square)](LICENSE)
+[![Issues](https://img.shields.io/github/issues/janheinrichmerker/android-issue-reporter?style=flat-square)](https://github.com/janheinrichmerker/android-issue-reporter/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/janheinrichmerker/android-issue-reporter?style=flat-square)](https://github.com/janheinrichmerker/android-issue-reporter/pulls)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/janheinrichmerker/android-issue-reporter?style=flat-square)](https://github.com/janheinrichmerker/android-issue-reporter/commits)
+[![Maintenance](https://img.shields.io/maintenance/yes/2024?style=flat-square)](https://github.com/janheinrichmerker/android-issue-reporter/graphs/contributors)
+[![License](https://img.shields.io/github/license/janheinrichmerker/android-issue-reporter?style=flat-square)](LICENSE)
 
 # android-issue-reporter
 
@@ -38,7 +38,7 @@ Add the _android-issue-reporter_ dependency to your app's `build.gradle` (or `bu
 
 ```gradle
 dependencies {
-    implementation 'com.github.heinrichreimer:android-issue-reporter:1.4.2'
+    implementation 'com.github.janheinrichmerker:android-issue-reporter:1.4.2'
 }
 ```
 
@@ -48,7 +48,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.github.heinrichreimer:android-issue-reporter:1.4.2")
+    implementation("com.github.janheinrichmerker:android-issue-reporter:1.4.2")
 }
 ```
 
@@ -80,7 +80,7 @@ dependencyResolutionManagement {
 
 </details>
 
-Check out the latest dependency _android-issue-reporter_ from [jitpack.io](https://jitpack.io/#com.github.heinrichreimer/android-issue-reporter).
+Check out the latest dependency _android-issue-reporter_ from [jitpack.io](https://jitpack.io/#com.github.janheinrichmerker/android-issue-reporter).
 
 ## Usage
 
@@ -92,7 +92,7 @@ Just start the issue reporter directly from your activity using the fluent launc
 
 ```java
 IssueReporterLauncher
-        .forTarget("heinrichreimer", "android-issue-reporter")
+        .forTarget("janheinrichmerker", "android-issue-reporter")
         // [Recommended] Theme to use for the reporter. 
         // (See #theming for further information.)
         .theme(R.style.Theme_App_Dark)
@@ -120,7 +120,7 @@ IssueReporterLauncher
 
 ```kotlin
 IssueReporterLauncher
-        .forTarget("heinrichreimer", "android-issue-reporter")
+        .forTarget("janheinrichmerker", "android-issue-reporter")
         // [Recommended] Theme to use for the reporter. 
         // (See #theming for further information.)
         .theme(R.style.Theme_App_Dark)
@@ -273,15 +273,15 @@ Create a theme extending `Theme.IssueReporter` theme and set it to the launcher 
 
 ## Development
 
-To contribute to the _android-issue-reporter_ library, just [create a codespace](https://codespaces.new/heinrichreimer/android-issue-reporter) from this repository or clone it in an editor that supports [Dev Containers](https://containers.dev/) (e.g., [Visual Studio Code](https://code.visualstudio.com/learn/develop-cloud/containers) or [IntelliJ](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html)).
+To contribute to the _android-issue-reporter_ library, just [create a codespace](https://codespaces.new/janheinrichmerker/android-issue-reporter) from this repository or clone it in an editor that supports [Dev Containers](https://containers.dev/) (e.g., [Visual Studio Code](https://code.visualstudio.com/learn/develop-cloud/containers) or [IntelliJ](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html)).
 All required dependencies will automatically be installed for you. \
-Once ready, [create a pull request](https://github.com/heinrichreimer/android-issue-reporter/compare) with your changes. We're happy to any contribution!
+Once ready, [create a pull request](https://github.com/janheinrichmerker/android-issue-reporter/compare) with your changes. We're happy to any contribution!
 
 ## Support
 
-If you hit any problems using _android-issue-reporter_, please file an [issue](https://github.com/heinrichreimer/android-issue-reporter/issues). We're happy to help!
+If you hit any problems using _android-issue-reporter_, please file an [issue](https://github.com/janheinrichmerker/android-issue-reporter/issues). We're happy to help!
 
 ## License
 
 This repository is released under the [MIT license](LICENSE).
-If you like _android-issue-reporter_, consider [sponsoring me](https://github.com/sponsors/heinrichreimer).
+If you like _android-issue-reporter_, consider [sponsoring me](https://github.com/sponsors/janheinrichmerker).

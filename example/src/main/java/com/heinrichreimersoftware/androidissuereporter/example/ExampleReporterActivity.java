@@ -41,7 +41,7 @@ public class ExampleReporterActivity extends IssueReporterActivity {
 
     @Override
     public GithubTarget getTarget() {
-        return new GithubTarget("HeinrichReimer", "android-issue-reporter");
+        return new GithubTarget("janheinrichmerker", "android-issue-reporter");
     }
 
     @Override
